@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject/RemindMe/Accueil.dart';
 import 'package:flutterproject/RemindMe/Page_Principale/Principale.dart';
 import '../Data.dart';
+import 'package:textfield_datepicker/textfield_dateAndTimePicker.dart';
 
-class Seconnecter extends StatelessWidget {
-  static String routeName = '/Seconnecter';
-  final _connexion = TextEditingController();
+class CreerRappel extends StatelessWidget {
+  static String routeName = '/CreerRappel';
+  final _username = TextEditingController();
   final _password = TextEditingController();
+  final _email = TextEditingController();
 
-  Seconnecter({Key? key, required String title, String? content})
+  CreerRappel({Key? key, required String title, String? content})
       : super(key: key);
 
   @override
@@ -43,6 +45,9 @@ class Seconnecter extends StatelessWidget {
                       fit: BoxFit.contain),
                 ),
               ),
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.10)),
               SizedBox(
                   height: MediaQuery.of(context).size.height * 0.17,
                   width: MediaQuery.of(context).size.width,
@@ -66,9 +71,9 @@ class Seconnecter extends StatelessWidget {
                     SizedBox(
                       width: 300.0,
                       child: TextField(
-                        controller: _connexion,
+                        controller: _username,
                         decoration: const InputDecoration(
-                          hintText: "Nom d'utilisateur",
+                          hintText: "Titre du rappel",
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -81,7 +86,20 @@ class Seconnecter extends StatelessWidget {
                       child: TextField(
                         controller: _password,
                         decoration: const InputDecoration(
-                          hintText: 'Mot de passe',
+                          hintText: 'Date du rappel',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.02)),
+                    SizedBox(
+                      width: 300.0,
+                      child: TextField(
+                        controller: _email,
+                        decoration: const InputDecoration(
+                          hintText: 'Email',
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -104,64 +122,8 @@ class Seconnecter extends StatelessWidget {
                           );
                         },
                         color: const Color.fromRGBO(75, 75, 75, 1),
-                        child: const Text("Continuer",
+                        child: const Text("Je m'inscris",
                             style: TextStyle(color: Colors.white)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.17)),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.49,
-                                    child: const Text(
-                                      "Vous n'avez pas encore de compte ?",
-                                      textAlign: TextAlign.right,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Color.fromRGBO(75, 75, 75, 1)),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width *
-                                                0.01)),
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.16,
-                                    child: const Text(
-                                      "s'inscrire ici",
-                                      textAlign: TextAlign.left,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Color.fromRGBO(75, 75, 75, 1)),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.17)),
-                        ],
                       ),
                     ),
                   ],
