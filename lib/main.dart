@@ -57,6 +57,17 @@ void main() {
         });
       }
 
+      if (settings.name == Parametres.routeName) {
+        final Data arguments = settings.arguments as Data;
+        return MaterialPageRoute(builder: (context) {
+          return Parametres(
+            title: arguments.title,
+            content: arguments.content,
+          );
+        });
+      }
+
+
     },
 
     onUnknownRoute: (settings) {

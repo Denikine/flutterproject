@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject/RemindMe/Connexion/Seconnecter.dart';
 import 'package:flutterproject/RemindMe/Inscription/Inscrire.dart';
+import 'package:flutterproject/RemindMe/Rechercher/Rechercher.dart';
 import '../Data.dart';
 
 class Principale extends StatelessWidget {
@@ -15,14 +16,14 @@ class Principale extends StatelessWidget {
   ];
 
   void onSelect(item) {
-    switch (item) {
-      case 'Paramètres':
-        print('Paramètres clicked');
-        break;
-      case 'Deconnexion':
-        print('Profile clicked');
-        break;
-    }
+      switch (item) {
+        case 'Paramètres':
+          print('Paramètres clicked');
+          break;
+        case 'Deconnexion':
+          print('Deconnexion clicked');
+          break;
+      }
   }
 
   static String routeName = '/Principale';
@@ -43,6 +44,7 @@ class Principale extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 233, 233, 233),
           leading: const BackButton(
             color: Color.fromRGBO(75, 75, 75, 1)
@@ -113,13 +115,32 @@ class Principale extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
         selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
         unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
-        items: const <BottomNavigationBarItem>[
+        items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Color.fromARGB(255, 233, 233, 233)),
-            label: 'Rechercher',
+            icon: IconButton(onPressed: () {
+              Navigator.pushNamed(
+                            context,
+                            Rechercher.routeName,
+                            arguments: Data(
+                              title: 'Envoyer des arguments',
+                              content: 'Le contenu',
+                            ),
+                          );
+            }, icon: const Icon(Icons.search, color: Color.fromARGB(255, 233, 233, 233))),
+            label: "Rechercher",
           ),
+          
           BottomNavigationBarItem(
-            icon: Icon(Icons.add, color: Color.fromARGB(255, 233, 233, 233)),
+            icon: IconButton(onPressed: () {
+              Navigator.pushNamed(
+                            context,
+                            Rechercher.routeName,
+                            arguments: Data(
+                              title: 'Envoyer des arguments',
+                              content: 'Le contenu',
+                            ),
+                          );
+            }, icon: const Icon(Icons.add, color: Color.fromARGB(255, 233, 233, 233))),
             label: 'Créer', 
           ),
         ],

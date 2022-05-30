@@ -104,9 +104,8 @@ class Accueil extends StatelessWidget {
                           );
             }, icon: const Icon(Icons.person_add, color: Color.fromARGB(255, 233, 233, 233))),
             label: "S'inscrire",
-            
-            
           ),
+          
           BottomNavigationBarItem(
             icon: IconButton(onPressed: () {
               Navigator.pushNamed(

@@ -51,18 +51,6 @@ class Inscrire extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    SizedBox(
-                      width: 300.0, 
-                      child: TextField(
-                        controller: _username,
-                        decoration: const InputDecoration(
-                          hintText: "Nom d'utilisateur",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-
-                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02)),
 
                     SizedBox(
                       width: 300.0, 
