@@ -10,31 +10,38 @@ import '../Data.dart';
 class Principale extends StatelessWidget {
   static String routeName = '/Principale';
 
-  const Principale({Key? key, required String title, required String content}) : super(key: key);
-  
+  const Principale({Key? key, required String title, required String content})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Center(
         child: Container(
           color: const Color.fromARGB(255, 233, 233, 233),
-
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10)),
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.10)),
 
 //-------------------------------------------------------------------------//
 //------------------------- Bienvenue sur Kafumi -------------------------//
 //------------------------------------------------------------------------//
 
               Container(
-                color: const Color.fromARGB(255, 233, 233, 233),
-                height: MediaQuery.of(context).size.height * 0.17,
-                width: MediaQuery.of(context).size.width,
-                child: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
-                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 75, color: Color.fromRGBO(33, 45, 64, 1)),)
-              ),
+                  color: const Color.fromARGB(255, 233, 233, 233),
+                  height: MediaQuery.of(context).size.height * 0.17,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Text(
+                    'RemindMe',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 75,
+                        color: Color.fromRGBO(33, 45, 64, 1)),
+                  )),
 
 //------------------------------------------------------------------------------------------//
 //------------------------- Bouton + intitulé Rejoindre une partie -------------------------//
@@ -45,9 +52,11 @@ class Principale extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1)),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.1)),
                     SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.42,
+                      height: MediaQuery.of(context).size.height * 0.42,
                       child: InkWell(
                         onTap: () {
                           Navigator.pushNamed(
@@ -60,26 +69,44 @@ class Principale extends StatelessWidget {
                           );
                         },
                         child: Column(
-                          children:[
+                          children: [
                             Container(
                               height: MediaQuery.of(context).size.height * 0.15,
                               decoration: const BoxDecoration(
-                                image: DecorationImage(image: AssetImage('image/Cloche.png'), fit: BoxFit.contain)
-                              ),
+                                  image: DecorationImage(
+                                      image: AssetImage('image/Cloche.png'),
+                                      fit: BoxFit.contain)),
                             ),
-                             Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01)),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.01)),
                             Container(
-                              color: const Color.fromARGB(255, 233, 233, 233),
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              child: const Text("N'oubliez plus de remplir vos obligations, finir vos tâches", textAlign: TextAlign.center, overflow: 
-                              TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
-                            ),
+                                color: const Color.fromARGB(255, 233, 233, 233),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                child: const Text(
+                                  "N'oubliez plus de remplir vos obligations, finir vos tâches",
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Color.fromRGBO(75, 75, 75, 1)),
+                                )),
                             Container(
-                              color: const Color.fromARGB(255, 233, 233, 233),
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: const Text('une partie', textAlign: TextAlign.center, overflow: 
-                              TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
-                            ),
+                                color: const Color.fromARGB(255, 233, 233, 233),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.06,
+                                child: const Text(
+                                  'une partie',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Color.fromRGBO(75, 75, 75, 1)),
+                                )),
                           ],
                         ),
                       ),
@@ -123,8 +150,10 @@ class Principale extends StatelessWidget {
                               },
                               child: Container(
                                 decoration: const BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('image/Rechercher.png'), fit: BoxFit.contain)
-                                ),
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage('image/Rechercher.png'),
+                                        fit: BoxFit.contain)),
                               ),
                             ),
                           ),
@@ -145,13 +174,14 @@ class Principale extends StatelessWidget {
                               },
                               child: Container(
                                 decoration: const BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('image/Ajouter.png'), fit: BoxFit.contain)
-                                ),
+                                    image: DecorationImage(
+                                        image: AssetImage('image/Ajouter.png'),
+                                        fit: BoxFit.contain)),
                               ),
                             ),
                           ),
-                        ],  
-                      ),    
+                        ],
+                      ),
                     ),
                   ],
                 ),
