@@ -34,56 +34,68 @@ class _CreerRappelState extends State<CreerRappel> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: ListView(
-        children: [
-          Column(
-            children: [
-              TextFormField(
-                onSaved: (val) => task.name = val!,
-                decoration: const InputDecoration(
-                  labelText: 'Titre du rappel',
-                  icon: Icon(Icons.account_circle),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => _selectDate(context),
-                child: TextFormField(
-                  onSaved: (val) {
-                    task.date = selectedDate;
-                  },
-                  controller: _dateController,
-                  decoration: const InputDecoration(
-                    labelText: "Date du rappel",
-                    icon: Icon(Icons.calendar_today),
+    return Scaffold(
+        key: _formKey,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // here the desired height
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+            leading: const BackButton(color: Color.fromRGBO(75, 75, 75, 1)),
+          ),
+        ),
+        body: Center(
+            child: Container(
+                color: const Color.fromARGB(255, 233, 233, 233),
+                child: Column(children: [
+                  ListView(
+                    children: [
+                      Column(
+                        children: [
+                          TextFormField(
+                            onSaved: (val) => task.name = val!,
+                            decoration: const InputDecoration(
+                              labelText: 'Titre du rappel',
+                              icon: Icon(Icons.account_circle),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => _selectDate(context),
+                            child: TextFormField(
+                              onSaved: (val) {
+                                task.date = selectedDate;
+                              },
+                              controller: _dateController,
+                              decoration: const InputDecoration(
+                                labelText: "Date du rappel",
+                                icon: Icon(Icons.calendar_today),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Renseignez une date pour votre rappel";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                              }
+                            },
+                            child: const Text(
+                              "Enregistrer",
+                              style: TextStyle(
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Renseignez une date pour votre rappel";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                  }
-                },
-                child: const Text(
-                  "Enregistrer",
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                  ),
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
+                ]))));
   }
 
   _selectDate(BuildContext context) async {
