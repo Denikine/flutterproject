@@ -51,8 +51,9 @@ void main() {
           final Data arguments = settings.arguments as Data;
           return MaterialPageRoute(builder: (context) {
             return CreerRappel(
-              title: arguments.title,
-              content: arguments.content,
+              //title: arguments.title,
+              //content: arguments.content,
+              key: arguments.key,
             );
           });
         }

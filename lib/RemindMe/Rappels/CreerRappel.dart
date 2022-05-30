@@ -19,7 +19,7 @@ import 'Rappel.dart';
 
 class CreerRappel extends StatefulWidget {
   static String routeName = '/CreerRappel';
-  CreerRappel({required Key key}) : super(key: key);
+  const CreerRappel({required Key key}) : super(key: key);
 
   @override
   _CreerRappelState createState() => _CreerRappelState();
