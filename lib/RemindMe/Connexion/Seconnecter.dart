@@ -12,72 +12,58 @@ class Seconnecter extends StatelessWidget {
   final _connexion = TextEditingController();
   final _password = TextEditingController();
 
-  Seconnecter({Key? key, required String title, String? content})
-      : super(key: key);
-
+  Seconnecter({Key? key, required String title, String? content}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0), // here the desired height
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+          leading: const BackButton(
+            color: Color.fromRGBO(75, 75, 75, 1)
+          ),
+        ),
+      ),
+      
       body: Center(
         child: Container(
           color: const Color.fromARGB(255, 233, 233, 233),
+
           child: Column(
             children: [
+
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.of(context).size.height * 0.17,
                 width: MediaQuery.of(context).size.width,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      Accueil.routeName,
-                      arguments: Data(
-                        title: 'Envoyer des arguments',
-                        content: 'Le contenu',
-                      ),
-                    );
-                  },
-                  child: const Image(
-                      image: AssetImage('image/Retour.png'),
-                      alignment: Alignment.topLeft,
-                      fit: BoxFit.contain),
-                ),
+                child: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
+                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 75, color: Color.fromRGBO(75, 75, 75, 1)),)
               ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.17,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Text(
-                    'RemindMe',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 75,
-                        color: Color.fromRGBO(75, 75, 75, 1)),
-                  )),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.05)),
+
+              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05)),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.50,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
                     SizedBox(
-                      width: 300.0,
+                      width: 300.0, 
                       child: TextField(
                         controller: _connexion,
                         decoration: const InputDecoration(
-                          hintText: "Nom d'utilisateur",
+                          hintText: "Nom d'utilisateur ou mot de passe",
                           border: OutlineInputBorder(),
                         ),
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.02)),
+
+                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02)),
+
                     SizedBox(
-                      width: 300.0,
+                      width: 300.0, 
                       child: TextField(
                         controller: _password,
                         decoration: const InputDecoration(
@@ -86,9 +72,9 @@ class Seconnecter extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.02)),
+
+                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02)),
+
                     SizedBox(
                       height: 60,
                       width: 300.0,
@@ -104,10 +90,10 @@ class Seconnecter extends StatelessWidget {
                           );
                         },
                         color: const Color.fromRGBO(75, 75, 75, 1),
-                        child: const Text("Continuer",
-                            style: TextStyle(color: Colors.white)),
+                        child: const Text("Continuer", style: TextStyle(color: Colors.white)), 
                       ),
                     ),
+                    
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.15,
                       width: MediaQuery.of(context).size.width,
@@ -115,52 +101,34 @@ class Seconnecter extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.17)),
+                          
+                          Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17)),
+
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.15,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.49,
-                                    child: const Text(
-                                      "Vous n'avez pas encore de compte ?",
-                                      textAlign: TextAlign.right,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Color.fromRGBO(75, 75, 75, 1)),
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width *
-                                                0.01)),
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.16,
-                                    child: const Text(
-                                      "s'inscrire ici",
-                                      textAlign: TextAlign.left,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Color.fromRGBO(75, 75, 75, 1)),
-                                    )),
+                              children:[
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.49,
+                                child: const Text("Vous n'avez pas encore de compte ?", textAlign: TextAlign.right, overflow: 
+                                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                              ),
+
+                              Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.01)),
+
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.16,
+                                child: const Text("s'inscrire ici", textAlign: TextAlign.left, overflow: 
+                                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                              ),
                               ],
                             ),
                           ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.17)),
+
+                          Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.17)),
+
                         ],
                       ),
                     ),

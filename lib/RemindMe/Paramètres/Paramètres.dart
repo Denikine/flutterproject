@@ -5,30 +5,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject/RemindMe/Accueil.dart';
 import 'package:flutterproject/RemindMe/Page_Principale/Principale.dart';
+import 'package:flutterproject/RemindMe/Paramètres/Paramètres.dart';
 import '../Data.dart';
 
-class Inscrire extends StatelessWidget {
-  static String routeName = '/Inscrire';
+class Parametres extends StatelessWidget {
+  static String routeName = '/Parametres';
   final _username = TextEditingController();
   final _password = TextEditingController();
   final _email = TextEditingController();
 
-  Inscrire({Key? key, required String title, String? content}) : super(key: key);
+  Parametres({Key? key, required String title, String? content}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0), // here the desired height
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: const Color.fromARGB(255, 233, 233, 233),
-          leading: const BackButton(
-            color: Color.fromRGBO(75, 75, 75, 1)
-          ),
-        ),
-      ),
       
       body: Center(
         child: Container(
@@ -36,6 +26,32 @@ class Inscrire extends StatelessWidget {
 
           child: Column(
             children: [
+
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: [
+                    SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.15,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            Accueil.routeName,
+                            arguments: Data(
+                              title: 'Envoyer des arguments',
+                              content: 'Le contenu',
+                            ),
+                          );
+                        },
+                        child: const Image(image:AssetImage('image/Retour.png'),alignment: Alignment.topLeft,  fit: BoxFit.contain),
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.85)),
+                  ],
+                ),
+              ),
 
               Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10)),
               SizedBox(
