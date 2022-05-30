@@ -26,7 +26,7 @@ class CreerRappel extends StatefulWidget {
 }
 
 class _CreerRappelState extends State<CreerRappel> {
-  Rappel task = new Rappel();
+  Rappel task = new Rappel(date: null, name: '');
   final _formKey = GlobalKey<FormState>();
   TextEditingController _dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
@@ -42,7 +42,7 @@ class _CreerRappelState extends State<CreerRappel> {
               TextFormField(
                 onSaved: (val) => task.name = val!,
                 decoration: InputDecoration(
-                  labelText: 'Task Name',
+                  labelText: 'Titre du rappel',
                   icon: Icon(Icons.account_circle),
                 ),
               ),
@@ -53,26 +53,30 @@ class _CreerRappelState extends State<CreerRappel> {
                     task.date = selectedDate;
                   },
                   controller: _dateController,
-                  decoration: InputDecoration(
-                    labelText: "Date",
+                  decoration: const InputDecoration(
+                    labelText: "Date du rappel",
                     icon: Icon(Icons.calendar_today),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty)
-                      return "Please enter a date for your task";
+                    if (value!.isEmpty) {
+                      return "Renseignez une date pour votre rappel";
+                    }
                     return null;
                   },
                 ),
               ),
-              FlatButton(
-                child: Text("Submit"),
-                textColor: Colors.white,
-                color: Colors.blueAccent,
+              TextButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                   }
                 },
+                child: const Text(
+                  "Enregistrer",
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                  ),
+                ),
               )
             ],
           )
