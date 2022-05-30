@@ -7,7 +7,7 @@ import 'package:flutterproject/RemindMe/Accueil.dart';
 import 'package:flutterproject/RemindMe/Page_Principale/Principale.dart';
 import '../Data.dart';
 import 'package:textfield_datepicker/textfield_dateAndTimePicker.dart';
-import 'Rappel.dart';
+import 'rappel.dart';
 import 'package:intl/intl.dart';
 
 //class CreerRappel extends StatelessWidget {
