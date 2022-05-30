@@ -55,17 +55,6 @@ class Accueil extends StatelessWidget {
                     Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1)),
                     SizedBox(
                     height: MediaQuery.of(context).size.height * 0.42,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            Inscrire.routeName,
-                            arguments: Data(
-                              title: 'Envoyer des arguments',
-                              content: 'Le contenu',
-                            ),
-                          );
-                        },
                         child: Column(
                           children:[
                             Container(
@@ -89,76 +78,6 @@ class Accueil extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-//-----------------------------------------------------------------------------//
-//------------------------- S'inscrire & Se connecter -------------------------//
-//-----------------------------------------------------------------------------//
-
-              Container(
-                color: const Color.fromRGBO(75, 75, 75, 1),
-                height: MediaQuery.of(context).size.height * 0.15,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.10,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            color: const Color.fromRGBO(75, 75, 75, 1),
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Inscrire.routeName,
-                                  arguments: Data(
-                                    title: 'Envoyer des arguments',
-                                    content: 'Le contenu',
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('image/Incrire.png'), fit: BoxFit.contain)
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            color: const Color.fromRGBO(75, 75, 75, 1),
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Seconnecter.routeName,
-                                  arguments: Data(
-                                    title: 'Envoyer des arguments',
-                                    content: 'Le contenu',
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(image: AssetImage('image/SeConnecter.png'), fit: BoxFit.contain)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],  
-                      ),    
                     ),
                   ],
                 ),
@@ -167,6 +86,44 @@ class Accueil extends StatelessWidget {
           ),
         ),
       ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
+        selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+        unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+        items:  <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: IconButton(onPressed: () {
+              Navigator.pushNamed(
+                            context,
+                            Inscrire.routeName,
+                            arguments: Data(
+                              title: 'Envoyer des arguments',
+                              content: 'Le contenu',
+                            ),
+                          );
+            }, icon: const Icon(Icons.person_add, color: Color.fromARGB(255, 233, 233, 233))),
+            label: "S'inscrire",
+            
+            
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(onPressed: () {
+              Navigator.pushNamed(
+                            context,
+                            Seconnecter.routeName,
+                            arguments: Data(
+                              title: 'Envoyer des arguments',
+                              content: 'Le contenu',
+                            ),
+                          );
+            }, icon: const Icon(Icons.login, color: Color.fromARGB(255, 233, 233, 233))),
+            label: 'Se connecter', 
+          ),
+        ],
+
+      ),
+
     );
   }
 }

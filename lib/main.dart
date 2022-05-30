@@ -3,6 +3,7 @@ import 'package:flutterproject/RemindMe/Connexion/Seconnecter.dart';
 import 'package:flutterproject/RemindMe/Inscription/Inscrire.dart';
 import 'package:flutterproject/RemindMe/Page_Principale/Principale.dart';
 import 'package:flutterproject/RemindMe/Rappels/CreerRappel.dart';
+import 'package:flutterproject/RemindMe/Paramètres/Paramètres.dart';
 import 'RemindMe/Accueil.dart';
 import 'RemindMe/Data.dart';
 import 'RemindMe/Notfound.dart';
@@ -46,7 +47,6 @@ void main() {
             );
           });
         }
-
         if (settings.name == CreerRappel.routeName) {
           final Data arguments = settings.arguments as Data;
           return MaterialPageRoute(builder: (context) {
@@ -54,6 +54,16 @@ void main() {
               //title: arguments.title,
               //content: arguments.content,
               key: arguments.key,
+            );
+          });
+        }
+
+        if (settings.name == Parametres.routeName) {
+          final Data arguments = settings.arguments as Data;
+          return MaterialPageRoute(builder: (context) {
+            return Parametres(
+              title: arguments.title,
+              content: arguments.content,
             );
           });
         }

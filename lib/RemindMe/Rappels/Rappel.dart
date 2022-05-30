@@ -1,6 +1,5 @@
 class Rappel {
-  String name;
-  DateTime date;
-
-  Rappel({required this.name, required this.date});
+  String? name;
+  DateTime? date;
+  Rappel({this.name, this.date});
 }
