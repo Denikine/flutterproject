@@ -5,8 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject/RemindMe/Connexion/Seconnecter.dart';
 import 'package:flutterproject/RemindMe/Inscription/Inscrire.dart';
-import 'package:flutterproject/RemindMe/Rappels/CreerRappel.dart';
-import 'package:flutterproject/RemindMe/Rappels/creation_rappel.dart';
+import 'package:flutterproject/RemindMe/Rappels/create_rappel.dart';
 import 'Data.dart';
 
 class Accueil extends StatelessWidget {
@@ -160,7 +159,7 @@ class Accueil extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    FormDemo.routeName,
+                    TextFieldDateTimePicker.routeName,
                     arguments: Data(
                       title: 'Envoyer des arguments',
                       content: 'Le contenu',
