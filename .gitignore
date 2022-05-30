@@ -45,6 +45,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+<<<<<<< HEAD
 windows/flutter/generated_plugins.cmake
 pubspec.lock
 linux/flutter/generated_plugins.cmake
@@ -53,3 +54,7 @@ linux/flutter/generated_plugin_registrant.h
 linux/
 windows/
 macos/
+=======
+pubspec.lock
+windows/flutter/generated_plugins.cmake
+>>>>>>> Fabien

@@ -32,9 +32,18 @@ class _AddUserState extends State<AddUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ajout d\' un Utilisateur'),
+      
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0), // here the desired height
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+          leading: const BackButton(
+            color: Color.fromRGBO(75, 75, 75, 1)
+          ),
+        ),
       ),
+
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(15.0),
@@ -184,7 +193,7 @@ class _AddUserState extends State<AddUser> {
                 ),
                 new ElevatedButton(
                   onPressed: _validateInputs,
-                  child: new Text('Validate'),
+                  child: new Text("Je m'inscris"),
                 ),
               ],
             ),

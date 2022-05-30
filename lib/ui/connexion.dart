@@ -20,6 +20,7 @@ class Connexion extends StatefulWidget {
 }
 
 class ConnexionState extends State<Connexion> {
+  static String routeName = '/connexion';
   DatabaseHelper db = DatabaseHelper.instance; // instance de la BDD
 
   TextEditingController emailController = new TextEditingController();
@@ -31,15 +32,29 @@ class ConnexionState extends State<Connexion> {
   Widget build(BuildContext context) {
     // ignore: unnecessary_new
     return new Scaffold(
+
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0), // here the desired height
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+          leading: const BackButton(
+            color: Color.fromRGBO(75, 75, 75, 1)
+          ),
+        ),
+      ),
+
       body: SingleChildScrollView(
+        child: Container(
+          color: const Color.fromARGB(255, 233, 233, 233),
         child: Column(
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(75),
-              child: Center(
-                child: Text("CONNEXION"),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * 0.17,
+                width: MediaQuery.of(context).size.width,
+                child: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
+                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 75, color: Color.fromRGBO(75, 75, 75, 1)),)
               ),
-            ),
             Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Column(
@@ -83,7 +98,7 @@ class ConnexionState extends State<Connexion> {
                         adduser();
                       },
                       child: Text(
-                        'S\' inscrire',
+                        "Pas de compte ? S'inscrire",
                         style: TextStyle(
                             color: Colors.lightBlueAccent,
                             fontWeight: FontWeight.bold,
@@ -106,14 +121,7 @@ class ConnexionState extends State<Connexion> {
                           connexion();
                         },
                         child: Center(
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
+                          child: const Text("Continuer", style: TextStyle(color: Colors.white)), 
                         ),
                       ),
                     ),
@@ -123,6 +131,7 @@ class ConnexionState extends State<Connexion> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
