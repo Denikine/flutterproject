@@ -55,3 +55,4 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 linux/
 windows/
 macos/l
+*.cmake
