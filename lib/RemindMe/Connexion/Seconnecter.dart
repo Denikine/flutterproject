@@ -54,7 +54,7 @@ class Seconnecter extends StatelessWidget {
                       child: TextField(
                         controller: _connexion,
                         decoration: const InputDecoration(
-                          hintText: "Nom d'utilisateur ou mot de passe",
+                          hintText: "Email",
                           border: OutlineInputBorder(),
                         ),
                       ),

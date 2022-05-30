@@ -138,6 +138,7 @@ class Accueil extends StatelessWidget {
                     color: Color.fromARGB(255, 233, 233, 233))),
             label: "S'inscrire",
           ),
+          
           BottomNavigationBarItem(
             icon: IconButton(
                 onPressed: () {
