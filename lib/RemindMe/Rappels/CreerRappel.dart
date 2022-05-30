@@ -26,9 +26,9 @@ class CreerRappel extends StatefulWidget {
 }
 
 class _CreerRappelState extends State<CreerRappel> {
-  Rappel task = new Rappel(date: null, name: '');
+  Rappel task = new Rappel();
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _dateController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -41,7 +41,7 @@ class _CreerRappelState extends State<CreerRappel> {
             children: [
               TextFormField(
                 onSaved: (val) => task.name = val!,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Titre du rappel',
                   icon: Icon(Icons.account_circle),
                 ),
@@ -86,18 +86,19 @@ class _CreerRappelState extends State<CreerRappel> {
   }
 
   _selectDate(BuildContext context) async {
-    var selectedDate;
+    selectedDate;
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2019, 8),
         lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         var date =
             "${picked.toLocal().day}/${picked.toLocal().month}/${picked.toLocal().year}";
         _dateController.text = date;
       });
+    }
   }
 }
