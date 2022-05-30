@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject/RemindMe/Connexion/Seconnecter.dart';
 import 'package:flutterproject/RemindMe/Inscription/Inscrire.dart';
 import 'package:flutterproject/RemindMe/Page_Principale/Principale.dart';
-import 'package:flutterproject/RemindMe/Creation/CreerRappel.dart';
+import 'package:flutterproject/RemindMe/Rappels/CreerRappel.dart';
 import 'RemindMe/Accueil.dart';
 import 'RemindMe/Data.dart';
 import 'RemindMe/Notfound.dart';
