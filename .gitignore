@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -44,8 +45,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-pubspec.lock
-windows/flutter/generated_plugins.cmake
 windows/flutter/generated_plugins.cmake
 linux/flutter/generated_plugin_registrant.cc
 linux/flutter/generated_plugins.cmake
@@ -53,5 +52,3 @@ linux/flutter/generated_plugin_registrant.h
 macos/Flutter/ephemeral/Flutter-Generated.xcconfig
 macos/Flutter/ephemeral/flutter_export_environment.sh
 macos/Flutter/GeneratedPluginRegistrant.swift
-pubspec.lock
-windows/flutter/generated_plugins.cmake
