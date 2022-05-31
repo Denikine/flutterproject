@@ -68,6 +68,7 @@ class DatabaseHelper
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
+    File('$path').delete();
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }

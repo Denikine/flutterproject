@@ -63,7 +63,7 @@ class accueil extends StatelessWidget {
                                 image: DecorationImage(image: AssetImage('image/Cloche.png'), fit: BoxFit.contain)
                               ),
                             ),
-                             Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01)),
+                            Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01)),
                             Container(
                               color: const Color.fromARGB(255, 233, 233, 233),
                               height: MediaQuery.of(context).size.height * 0.05,
