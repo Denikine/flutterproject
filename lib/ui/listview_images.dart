@@ -6,6 +6,10 @@ import 'dart:io';
 
 import 'package:project_flutter/modele/database_helper.dart';
 import 'package:project_flutter/ui/camera.dart';
+import 'package:project_flutter/ui/create_reminder.dart';
+
+import '../main.dart';
+import 'add_user.dart';
 
 class ListViewImages extends StatefulWidget {
   List<CameraDescription> cameras;
@@ -30,8 +34,7 @@ class _ListViewImagesState extends State<ListViewImages> {
 
     db.getAllImage().then((notes) {
       setState(() {
-        notes.forEach((note) {
-        });
+        notes.forEach((note) {});
       });
     });
   }
@@ -55,6 +58,36 @@ class _ListViewImagesState extends State<ListViewImages> {
         crossAxisCount: 2,
       ),
       drawer: Drawer(), // slider en haut a gauche de l'application
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TextFieldDateTimePicker()));
+                // on passe a la vue create_rappel);
+              },
+              icon: const Icon(Icons.home),
+            ),
+            label: "Accueil",
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TextFieldDateTimePicker()));
+                // on passe a la vue create_rappel);
+              },
+              icon: const Icon(Icons.calendar_today),
+            ),
+            label: "Rappel",
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         // position d'un bouton pour la prise de photo
         onPressed: () {
