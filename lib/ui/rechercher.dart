@@ -3,9 +3,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutterproject/RemindMe/Connexion/Seconnecter.dart';
-import 'package:flutterproject/RemindMe/Inscription/Inscrire.dart';
-import '../Data.dart';
 
 class Rechercher extends StatelessWidget {
   
