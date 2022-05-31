@@ -2,22 +2,22 @@ class Imagecamera {
 
   late String id;
   late String photoname;
-  late String url;
+  late String path;
 
-  Imagecamera( this.id,this.photoname,this.url);
+  Imagecamera( this.id,this.path,this.photoname);
 
   Imagecamera.map(dynamic obj)
   {
     this.id = obj['id'];
     this.photoname = obj['photoname'];
-    this.url= obj['url'];
+    this.path= obj['path'];
   }
 
   Imagecamera.fromMap(Map<String,dynamic> map)
   {
     this.id = map['id'];
     this.photoname = map['photoname'];
-    this.url= map['url'];
+    this.path= map['path'];
   }
 
   Map<String, dynamic> toMap()
@@ -27,7 +27,7 @@ class Imagecamera {
         map['id'] = id;
     }
     map['photoname'] = photoname;
-    map['url'] = url;
+    map['path'] = path;
     return map;
   }
 }

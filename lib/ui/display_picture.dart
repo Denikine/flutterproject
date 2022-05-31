@@ -17,7 +17,7 @@ class DisplayPictureScreen extends StatelessWidget {
   DatabaseHelper db = DatabaseHelper.instance; // instance de la BDD
   String ?id;
   String ?photoname="photo";
-  String ?url="/image";
+  String ?path="/image";
 
   DisplayPictureScreen({Key? key, required this.cameras, required this.imagePath})
       : super(key: key);
@@ -82,7 +82,7 @@ class DisplayPictureScreen extends StatelessWidget {
 
     String id = Uuid().v4();
       await db
-          .insertPicture(Imagecamera(id, photoname!, url!)
+          .insertPicture(Imagecamera(id, path! ,photoname!)
               .toMap())
           .then((_) {
         Navigator.pop(context); // retour a la connexion
