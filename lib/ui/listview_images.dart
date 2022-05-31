@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'dart:io';
 
 import 'package:project_flutter/modele/database_helper.dart';
+import 'package:project_flutter/ui/accueil.dart';
 import 'package:project_flutter/ui/camera.dart';
 import 'package:project_flutter/ui/create_reminder.dart';
 
@@ -63,10 +64,8 @@ class _ListViewImagesState extends State<ListViewImages> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TextFieldDateTimePicker()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => accueil()));
                 // on passe a la vue create_rappel);
               },
               icon: const Icon(Icons.home),
