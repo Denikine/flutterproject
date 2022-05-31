@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:project_flutter/modele/user.dart';
 import 'package:project_flutter/ui/listview_images.dart';
 import 'package:project_flutter/ui/add_user.dart';
+import 'package:project_flutter/ui/principale.dart';
 
 class Connexion extends StatefulWidget {
   List<CameraDescription> cameras; //liste de cameras disponibles
@@ -117,11 +118,16 @@ class ConnexionState extends State<Connexion> {
                       elevation: 7.0,
                       child: ElevatedButton(
                         onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => principale(content: '', title: '',)) 
+                          );
                           debugPrint("debug");
                           connexion();
                         },
                         child: Center(
-                          child: const Text("Continuer", style: TextStyle(color: Colors.white)), 
+                          child: const Text("Continuer", style: TextStyle(color: Colors.white)),
+
                         ),
                       ),
                     ),
