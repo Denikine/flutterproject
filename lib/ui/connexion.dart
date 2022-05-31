@@ -66,7 +66,7 @@ class ConnexionState extends State<Connexion> {
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey),
+                            color: Color.fromRGBO(75, 75, 75, 1)),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.lightBlue),
                         ),
@@ -82,7 +82,7 @@ class ConnexionState extends State<Connexion> {
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey),
+                          color: Color.fromRGBO(75, 75, 75, 1)),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.lightBlue),
                       ),
@@ -100,7 +100,7 @@ class ConnexionState extends State<Connexion> {
                       child: Text(
                         "Pas de compte ? S'inscrire",
                         style: TextStyle(
-                            color: Colors.lightBlueAccent,
+                            color: Color.fromRGBO(75, 75, 75, 1),
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
                             decoration: TextDecoration.underline),
@@ -112,12 +112,12 @@ class ConnexionState extends State<Connexion> {
                     height: 40.0,
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.lightBlueAccent,
-                      color: Colors.blueAccent,
+                      shadowColor: Color.fromRGBO(75, 75, 75, 1),
+                      color: Color.fromRGBO(75, 75, 75, 1),
                       elevation: 7.0,
                       child: ElevatedButton(
                         onPressed: () {
-                          debugPrint("efzerze");
+                          debugPrint("debug");
                           connexion();
                         },
                         child: Center(

@@ -46,12 +46,21 @@ class _AddUserState extends State<AddUser> {
 
       body: SingleChildScrollView(
         child: Container(
+          color: const Color.fromARGB(255, 233, 233, 233),
           margin: EdgeInsets.all(15.0),
           alignment: Alignment.center,
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
+
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.17,
+                width: MediaQuery.of(context).size.width,
+                child: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
+                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 75, color: Color.fromRGBO(75, 75, 75, 1)),)
+              ),
+
                 TextFormField(
                   keyboardType: TextInputType.text,
                   validator: validText,
@@ -63,7 +72,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
@@ -83,7 +92,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
@@ -104,7 +113,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
@@ -125,7 +134,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
@@ -140,7 +149,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
@@ -182,7 +191,7 @@ class _AddUserState extends State<AddUser> {
                     labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey),
+                        color: Color.fromRGBO(75, 75, 75, 1)),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
                     ),
