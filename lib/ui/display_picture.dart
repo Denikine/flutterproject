@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter/modele/database_helper.dart';
 import 'package:project_flutter/ui/listview_images.dart';
 import 'package:camera/camera.dart';
+import 'package:project_flutter/modele/Imagecamera.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -14,6 +15,9 @@ class DisplayPictureScreen extends StatelessWidget {
 
   final String imagePath;
   DatabaseHelper db = DatabaseHelper.instance; // instance de la BDD
+  String ?id;
+  String ?photoname="photo";
+  String ?url="/image";
 
   DisplayPictureScreen({Key? key, required this.cameras, required this.imagePath})
       : super(key: key);
@@ -29,40 +33,33 @@ class DisplayPictureScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    // padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        IconButton(icon: Icon(Icons.call), onPressed: null),
-                        IconButton(
-                            icon: Icon(Icons.apps),
-                            onPressed: () {
-                              back_to_list(context);
-                            }),
-                      ],
+                  
+                Padding(
+                  padding: new EdgeInsets.all(5.0),
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.text,
+                  onSaved: (String ?val) {
+                    photoname = val!;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'PHOTONAME',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.lightBlue),
                     ),
                   ),
-                  Expanded(
-                    // rend les images responsives
-                    flex: 6,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: FileImage(File(
-                              imagePath)), //Image.file(File(elem.path)), //new ExactAssetImage("assets/images/"+elem.path),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
+                ),
+                Padding(
+                  padding: new EdgeInsets.all(5.0),
+                ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        IconButton(
-                            icon: Icon(Icons.accessibility_new),
-                            onPressed: null),
                         IconButton(
                             icon: Icon(Icons.done),
                             onPressed: () {
@@ -84,8 +81,12 @@ class DisplayPictureScreen extends StatelessWidget {
     // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
 
     String id = Uuid().v4();
-
-
+      await db
+          .insertPicture(Imagecamera(id, photoname!, url!)
+              .toMap())
+          .then((_) {
+        Navigator.pop(context); // retour a la connexion
+      });
     back_to_list(context);
   }
 
