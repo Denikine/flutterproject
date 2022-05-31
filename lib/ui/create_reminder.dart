@@ -2,8 +2,11 @@
 import 'package:project_flutter/ui/mediaQuery/size_helpers.dart';
 import 'package:project_flutter/ui/widgets/labelText.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'package:project_flutter/modele/database_helper.dart';
 import 'package:textfield_datepicker/textfield_dateAndTimePicker.dart';
 import 'package:intl/intl.dart';
+import 'package:project_flutter/modele/reminder.dart';
 
 class TextFieldDateTimePicker extends StatefulWidget {
   static const routeName = '/create_rappel';
@@ -16,10 +19,13 @@ class TextFieldDateTimePicker extends StatefulWidget {
 }
 
 class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
+  DatabaseHelper db = DatabaseHelper.instance;
   final Map<String, dynamic> _formData = {'Title': null, 'Description': null};
   final _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String reminderTitle;
+  late String title, comment;
+  late DateTime date;
+  bool error = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +65,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     keyboardType: TextInputType.text,
                     //validator: validText,
                     onSaved: (String? val) {
-                      reminderTitle = val!;
+                      title = val!;
                     },
                     decoration: const InputDecoration(
                       labelText: 'Renseignez votre titre',
@@ -129,6 +135,33 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   ),
                   materialInitialTime: TimeOfDay.now(),
                 ),
+                const LabelText(labelValue: "Commentaire du rappel"),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 320,
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    //validator: validText,
+                    onSaved: (String? val) {
+                      comment = val!;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Renseignez votre commentaire',
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          //fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(55, 75, 75, 75)),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.lightBlue),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
                 //ElevatedButton(onPressed: onPressed, child: child),
                 TextButton(
                   onPressed: () {
@@ -153,6 +186,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print(_formData);
+
+      //_sendform(context);
     }
   }
 
@@ -164,4 +199,25 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
       child: const Text('SEND'),
     );
   }
+
+  // void _sendform(BuildContext context) async {
+  //   // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
+
+  //   String id = Uuid().v4();
+
+  //   int? nb = await db.emailexist(title);
+  //   if (nb! > 0) {
+  //     setState(() {
+  //       error = true;
+  //     });
+  //   } else {
+  //     await db
+  //         .insertReminder(
+  //             Reminder(id, title, date.toString(), time.toString(), comment)
+  //                 .toMap())
+  //         .then((_) {
+  //       Navigator.pop(context); // retour a la connexion
+  //     });
+  //   }
+  // }
 }
