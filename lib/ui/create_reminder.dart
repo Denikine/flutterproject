@@ -32,6 +32,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
           elevation: 7,
           automaticallyImplyLeading: true,
           centerTitle: true,
@@ -40,6 +41,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
             style: TextStyle(
               fontSize: displayWidth(context) * 0.045,
               color: Colors.white,
+              //selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+              //unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
             ),
           ),
         ),
@@ -167,6 +170,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                 ),
                 //ElevatedButton(onPressed: onPressed, child: child),
                 TextButton(
+                  //backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
@@ -175,7 +179,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   child: const Text(
                     "Enregistrer",
                     style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
                 ),
