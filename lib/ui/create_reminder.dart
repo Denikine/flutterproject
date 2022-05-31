@@ -72,7 +72,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(101, 75, 75, 75)),
+                          color: Color.fromARGB(55, 75, 75, 75)),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.lightBlue),
                       ),
@@ -83,7 +83,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   height: 40,
                 ),
                 const LabelText(
-                  labelValue: "Date et heure du rappel",
+                  labelValue: "Date et heure",
                 ),
                 TextfieldDateAndTimePicker(
                   cupertinoDatePickerBackgroundColor: Colors.white,
@@ -135,7 +135,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   ),
                   materialInitialTime: TimeOfDay.now(),
                 ),
-                const LabelText(labelValue: "Commentaire du rappel"),
+                const LabelText(labelValue: "Commentaire"),
                 const SizedBox(
                   height: 10,
                 ),
