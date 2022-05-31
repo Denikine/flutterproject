@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:project_flutter/modele/database_helper.dart';
+import 'package:project_flutter/ui/accueil.dart';
 import 'package:project_flutter/ui/listview_images.dart';
 import 'package:camera/camera.dart';
 import 'package:project_flutter/modele/Imagecamera.dart';
+import 'package:project_flutter/ui/principale.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -96,7 +98,7 @@ class DisplayPictureScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ListViewImages(cameras)), //MyApp()),
+          builder: (context) => principale(content: '', title: '',)), //MyApp()),
     );
   }
 }

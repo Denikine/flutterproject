@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:camera/camera.dart';
 import 'package:project_flutter/ui/rechercher.dart';
+import 'package:project_flutter/ui/accueil.dart';
+import 'package:camera/camera.dart';
+
+import 'camera.dart';
 
 class principale extends StatelessWidget {
   
@@ -117,16 +121,19 @@ class principale extends StatelessWidget {
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: IconButton(onPressed: () {
-
-            }, icon: const Icon(Icons.search, color: Color.fromARGB(255, 233, 233, 233))),
-            label: "Rechercher",
+              Navigator.push( context, MaterialPageRoute(
+                  builder: (context) => CameraScreen(cameras: cameras) // on passe la camera
+                      ),
+                );
+            }, icon: const Icon(Icons.camera_alt_outlined, color: Color.fromARGB(255, 233, 233, 233))),
+            label: "Photo",
           ),
           
           BottomNavigationBarItem(
             icon: IconButton(onPressed: () {
-
+                
             }, icon: const Icon(Icons.add, color: Color.fromARGB(255, 233, 233, 233))),
-            label: 'Créer', 
+            label: 'Evenement', 
           ),
         ],
 
