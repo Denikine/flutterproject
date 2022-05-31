@@ -1,6 +1,6 @@
-# project_flutter
+# Projet Flutter
 
-A new Flutter project.
+Notre projet Flutter : l'application RemindMe.
 
 ## Getting Started
 
