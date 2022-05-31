@@ -12,8 +12,9 @@ class DatabaseHelper {
 
   static final tablePictures = 'image_table';
   static final idPictures = 'id';
-  static final pathPictures = 'path';
-  static final commentPictures = 'comment';
+
+  static final path = 'path';
+  static final photoname = 'photoname';
 
   static final tableUser = 'user_table';
   static final idUser = 'id';
@@ -42,8 +43,8 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE $tablePictures ( 
         $idPictures TEXT PRIMARY KEY,    
-        $pathPictures TEXT NOT NULL,
-        $commentPictures TEXT NULL 
+        $path TEXT NOT NULL,
+        $photoname TEXT NULL 
       )
     ''');
 
@@ -67,6 +68,7 @@ class DatabaseHelper {
   // this opens the database (and creates it if it doesn't exist)
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
+
     String path = join(documentsDirectory.path, _databaseName);
     File('$path').delete();
     return await openDatabase(path,
@@ -93,8 +95,8 @@ class DatabaseHelper {
 
   Future<List> getAllImage() async {
     Database? db = await instance.database;
-    var result = await db!.query(tablePictures,
-        columns: [idPictures, pathPictures, commentPictures]);
+    var result =
+        await db!.query(tablePictures, columns: [idPictures, path, photoname]);
     return result.toList();
   }
 
