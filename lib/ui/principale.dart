@@ -45,9 +45,6 @@ class principale extends StatelessWidget {
         child: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 233, 233, 233),
-          leading: const BackButton(
-            color: Color.fromRGBO(75, 75, 75, 1)
-          ),
           centerTitle: true,
           title: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
                     TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromRGBO(75, 75, 75, 1)),),

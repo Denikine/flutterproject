@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:project_flutter/ui/add_user.dart';
 import 'package:project_flutter/ui/connexion.dart';
-import 'package:camera/camera.dart';
 
 class accueil extends StatelessWidget {
 
@@ -67,13 +66,13 @@ class accueil extends StatelessWidget {
                             Container(
                               color: const Color.fromARGB(255, 233, 233, 233),
                               height: MediaQuery.of(context).size.height * 0.05,
-                              child: const Text("N'oubliez plus de remplir vos obligations, finir vos tâches", textAlign: TextAlign.center, overflow: 
+                              child: const Text("L'application de rappel et de sauvegarde", textAlign: TextAlign.center, overflow: 
                               TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
                             ),
                             Container(
                               color: const Color.fromARGB(255, 233, 233, 233),
                               height: MediaQuery.of(context).size.height * 0.06,
-                              child: const Text('une partie', textAlign: TextAlign.center, overflow: 
+                              child: const Text('de photos', textAlign: TextAlign.center, overflow: 
                               TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
                             ),
                           ],
