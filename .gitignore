@@ -54,5 +54,5 @@ macos/Flutter/ephemeral/flutter_export_environment.sh
 macos/Flutter/GeneratedPluginRegistrant.swift
 linux/
 windows/
-macos/l
+macos/
 *.cmake
