@@ -6,34 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:camera/camera.dart';
 import 'package:project_flutter/ui/rechercher.dart';
+import 'package:project_flutter/ui/accueil.dart';
+import 'package:camera/camera.dart';
+
+import 'camera.dart';
+import 'package:project_flutter/ui/create_reminder.dart';
 
 class principale extends StatelessWidget {
-  
   var myMenuItems = <String>[
     'Paramètres',
     'Deconnexion',
   ];
 
   void onSelect(item) {
-      switch (item) {
-        case 'Paramètres':
-          print('Paramètres clicked');
-          break;
-        case 'Deconnexion':
-          print('Deconnexion clicked');
-          break;
-      }
+    switch (item) {
+      case 'Paramètres':
+        print('Paramètres clicked');
+        break;
+      case 'Deconnexion':
+        print('Deconnexion clicked');
+        break;
+    }
   }
 
   static String routeName = '/principale';
 
-  principale({Key? key, required String title, required String content}) : super(key: key);
-  
-  
+  principale({Key? key, required String title, required String content})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
 //===============================================================================================================
 //===============================================================================================================
 //=================================AppBar : 3 dots paramètres et Deconnexion=====================================
@@ -45,9 +48,17 @@ class principale extends StatelessWidget {
         child: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+          leading: const BackButton(color: Color.fromRGBO(75, 75, 75, 1)),
           centerTitle: true,
-          title: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
-                    TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color.fromRGBO(75, 75, 75, 1)),),
+          title: const Text(
+            'RemindMe',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Color.fromRGBO(75, 75, 75, 1)),
+          ),
           actions: <Widget>[
             PopupMenuButton<String>(
                 onSelected: onSelect,
@@ -62,7 +73,7 @@ class principale extends StatelessWidget {
           ],
         ),
       ),
-      
+
 //===============================================================================================================
 //===============================================================================================================
 //===============================================================================================================
@@ -73,25 +84,29 @@ class principale extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height - 100,
           color: const Color.fromARGB(255, 233, 233, 233),
-
           child: Column(
             children: [
-
-              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.125)),
-
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.125)),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1)),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.1)),
                     SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.42,
-                        child: Column(
-                          children:[
-                            Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.42)),
-                          ],
-                        ),
+                      height: MediaQuery.of(context).size.height * 0.42,
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height *
+                                      0.42)),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -111,24 +126,30 @@ class principale extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
         selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
         unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
-        items:  <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: IconButton(onPressed: () {
-
-            }, icon: const Icon(Icons.search, color: Color.fromARGB(255, 233, 233, 233))),
-            label: "Rechercher",
+              Navigator.push( context, MaterialPageRoute(
+                  builder: (context) => CameraScreen(cameras: cameras) // on passe la camera
+                      ),
+                );
+            }, icon: const Icon(Icons.camera_alt_outlined, color: Color.fromARGB(255, 233, 233, 233))),
+            label: "Photo",
           ),
-          
           BottomNavigationBarItem(
-            icon: IconButton(onPressed: () {
-
-            }, icon: const Icon(Icons.add, color: Color.fromARGB(255, 233, 233, 233))),
-            label: 'Créer', 
-          ),
+            icon: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TextFieldDateTimePicker()));
+              },
+              icon: const Icon(Icons.calendar_today),
+            ),
+            label: "Rappel",
+          )
         ],
-
       ),
-
     );
   }
-}   
+}

@@ -6,15 +6,15 @@ import 'dart:io';
 
 import 'package:project_flutter/modele/user.dart';
 
-class DatabaseHelper
-{
+class DatabaseHelper {
   static final _databaseName = "MyBatabase.bd";
   static final _databaseVersion = 1;
 
   static final tablePictures = 'image_table';
   static final idPictures = 'id';
-  static final path= 'path';
-  static final photoname='photoname';
+
+  static final path = 'path';
+  static final photoname = 'photoname';
 
   static final tableUser = 'user_table';
   static final idUser = 'id';
@@ -61,13 +61,14 @@ class DatabaseHelper
     ''');
 
 //INSERT INTO $tableUser ($idUser,$passworsUser,$firstnameUser,$lastnameUser,$birthdateUser,$phoneUser,$emailUser) VALUES("Admin_id","admin","firstNameAdmin","lastNameDamin","1999-04-03","00-01-02-03-04","admin@admin.com");
-    await db.rawInsert('INSERT INTO $tableUser ($idUser,$passworsUser,$firstnameUser,$lastnameUser,$birthdateUser,$phoneUser,$emailUser) VALUES("Admin_id","admin","firstNameAdmin","lastNameDamin","1999-04-03","00-01-02-03-04","admin@admin.com")');
+    await db.rawInsert(
+        'INSERT INTO $tableUser ($idUser,$passworsUser,$firstnameUser,$lastnameUser,$birthdateUser,$phoneUser,$emailUser) VALUES("Admin_id","admin","firstNameAdmin","lastNameDamin","1999-04-03","00-01-02-03-04","admin@admin.com")');
   }
 
   // this opens the database (and creates it if it doesn't exist)
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    
+
     String path = join(documentsDirectory.path, _databaseName);
     File('$path').delete();
     return await openDatabase(path,
@@ -94,7 +95,8 @@ class DatabaseHelper
 
   Future<List> getAllImage() async {
     Database? db = await instance.database;
-    var result = await db!.query(tablePictures, columns: [idPictures, path, photoname]);
+    var result =
+        await db!.query(tablePictures, columns: [idPictures, path, photoname]);
     return result.toList();
   }
 
@@ -115,12 +117,11 @@ class DatabaseHelper
     }
     return max;
   }
-*/ 
+*/
 
 //------------------------------------------------------------------USER--------------------------------------------------------------
 
-
-  //retourne l'utilisateur en fonction de son email et mdp 
+  //retourne l'utilisateur en fonction de son email et mdp
 
   // Inserts a row in the database where each key in the Map is a column name
   // and the value is the column value. The return value is the id of the
@@ -130,13 +131,20 @@ class DatabaseHelper
     return await db!.insert(tableUser, row);
   }
 
-  Future<User?> getUserConnexion(String email,String pwd) async {
+  Future<User?> getUserConnexion(String email, String pwd) async {
     Database? db = await instance.database;
-    List<Map> maps = await db!.query(
-        tableUser,
-        columns: [idUser,passworsUser,firstnameUser,lastnameUser,birthdateUser,phoneUser,emailUser],
+    List<Map> maps = await db!.query(tableUser,
+        columns: [
+          idUser,
+          passworsUser,
+          firstnameUser,
+          lastnameUser,
+          birthdateUser,
+          phoneUser,
+          emailUser
+        ],
         where: '$passworsUser = ? and  $emailUser = ?',
-        whereArgs: [pwd,email]);
+        whereArgs: [pwd, email]);
     if (maps.length > 0) {
       print(maps.first);
       print(maps.first.length);
@@ -147,15 +155,14 @@ class DatabaseHelper
   }
 
   Future<int?> queryRowCountUser() async {
-      Database? db = await instance.database;
-      return Sqflite.firstIntValue(
-          await db!.rawQuery('SELECT COUNT(*) FROM $tableUser'));
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(
+        await db!.rawQuery('SELECT COUNT(*) FROM $tableUser'));
   }
 
   Future<int?> emailexist(String email) async {
-      Database? db = await instance.database;
-      return Sqflite.firstIntValue(
-          await db!.rawQuery('SELECT COUNT(*) FROM $tableUser WHERE email = "$email"'));
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(await db!
+        .rawQuery('SELECT COUNT(*) FROM $tableUser WHERE email = "$email"'));
   }
-  
 }
