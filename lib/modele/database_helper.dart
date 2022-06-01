@@ -71,7 +71,7 @@ class DatabaseHelper {
         $idReminder TEXT PRIMARY KEY,
         $titleReminder TEXT NOT NULL,
         $commentReminder TEXT NOT NULL,
-        $dateTimeReminder TEXT NOT NULL,
+        $dateTimeReminder DATETIME NOT NULL
       )
     ''');
 
@@ -85,7 +85,7 @@ class DatabaseHelper {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     String path = join(documentsDirectory.path, _databaseName);
-    File('$path').delete();
+    debugPrint(path);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
@@ -185,7 +185,7 @@ class DatabaseHelper {
 
   Future<int> insertReminder(Map<String, dynamic> row) async {
     Database? db = await instance.database;
-    return await db!.insert(tableUser, row);
+    return await db!.insert(tablePictures, row);
   }
 
   Future<int?> queryRowCountReminder() async {

@@ -180,7 +180,6 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       _createNewReminder(context);
-      print(_formData);
 
       //_sendform(context);
     }
