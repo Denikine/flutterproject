@@ -63,10 +63,10 @@ class _principaleState extends State<principale> {
   final List<Reminder1> reminderdata = List.generate(
       Reminder.length,
       (index) => Reminder1('${title[index]}', '${comment[index]}',
-          '${date[index]}', '${time[index]} Description...'));
+          '${date[index]}', '${time[index]}'));
 
 //===============================================================================================================
-//=========================================  Scrolling  =========================================================
+//=========================================  Scrolling Photos ===================================================
 //===============================================================================================================
 
   final ScrollController _scrollController = ScrollController();
@@ -173,7 +173,7 @@ class _principaleState extends State<principale> {
       ),
 
 //===============================================================================================================
-//============================================= Photos ==========================================================
+//============================================= Rappels =========================================================
 //===============================================================================================================
 
       body: LayoutBuilder(builder: (context, constraints) {
@@ -185,6 +185,7 @@ class _principaleState extends State<principale> {
                 color: const Color.fromARGB(255, 233, 233, 233),
                 child: Column(
                   children: [
+                    SizedBox(height: 30),
                     Container(
                         color: const Color.fromARGB(255, 233, 233, 233),
                         height: MediaQuery.of(context).size.height * 0.03,
@@ -200,16 +201,13 @@ class _principaleState extends State<principale> {
                         )),
                     Expanded(
                         child: ListView.separated(
+                      controller: _scrollController,
                       itemBuilder: (BuildContext context, int index) {
                         if (index < items.length) {
                           return ListTile(
                             leading: const Icon(Icons.alarm),
                             title: Text(reminderdata[index].title),
                             subtitle: Text(reminderdata[index].comment),
-                            // leading: SizedBox(
-                            //   width: 50,
-                            //   height: 50,
-                            //   child: Text(reminderdata[index].comment),
                             // ),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -235,6 +233,12 @@ class _principaleState extends State<principale> {
                         );
                       },
                     )),
+
+//===============================================================================================================
+//============================================= Photos ==========================================================
+//===============================================================================================================
+
+                    SizedBox(height: 30),
                     Container(
                         color: const Color.fromARGB(255, 233, 233, 233),
                         height: MediaQuery.of(context).size.height * 0.03,

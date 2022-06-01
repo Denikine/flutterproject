@@ -49,7 +49,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
         body: SingleChildScrollView(
             child: Container(
           child: Form(
-            key: _formKey,
+            key: _formKey, // to validate the form
             child: Column(
               children: [
                 Padding(
@@ -141,10 +141,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     materialInitialTime: TimeOfDay.now(),
                   ),
                 ),
-                const LabelText(labelValue: "Commentaire"),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
+                const LabelText(labelValue: "Commentaire"),
                 Container(
                   width: 320,
                   child: TextFormField(
@@ -169,20 +169,26 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   height: 40,
                 ),
                 //ElevatedButton(onPressed: onPressed, child: child),
-                TextButton(
-                  //backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                    }
-                  },
-                  child: const Text(
-                    "Enregistrer",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                SizedBox(
+                  height: 40,
+                  width: 220,
+                  child: TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromRGBO(75, 75, 75, 1))),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                    },
+                    child: const Text(
+                      "Enregistrer",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
