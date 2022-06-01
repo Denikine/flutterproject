@@ -25,6 +25,12 @@ class DatabaseHelper {
   static final phoneUser = 'phone';
   static final emailUser = 'email';
 
+  static final tableReminder = 'reminder_table';
+  static final idReminder = 'id';
+  static final titleReminder = 'title';
+  static final dateTimeReminder = 'date';
+  static final commentReminder = 'comment';
+
   // make this a singleton class
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
@@ -60,6 +66,15 @@ class DatabaseHelper {
       )
     ''');
 
+    await db.execute('''     
+      CREATE TABLE $tableReminder (
+        $idReminder TEXT PRIMARY KEY,
+        $titleReminder TEXT NOT NULL,
+        $commentReminder TEXT NOT NULL,
+        $dateTimeReminder TEXT NOT NULL
+      )
+    ''');
+
 //INSERT INTO $tableUser ($idUser,$passworsUser,$firstnameUser,$lastnameUser,$birthdateUser,$phoneUser,$emailUser) VALUES("Admin_id","admin","firstNameAdmin","lastNameDamin","1999-04-03","00-01-02-03-04","admin@admin.com");
     await db.rawInsert(
         'INSERT INTO $tableUser ($idUser,$passworsUser,$firstnameUser,$lastnameUser,$birthdateUser,$phoneUser,$emailUser) VALUES("Admin_id","admin","firstNameAdmin","lastNameDamin","1999-04-03","00-01-02-03-04","admin@admin.com")');
@@ -70,7 +85,7 @@ class DatabaseHelper {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     String path = join(documentsDirectory.path, _databaseName);
-    File('$path').delete();
+    debugPrint(path);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
@@ -164,5 +179,24 @@ class DatabaseHelper {
     Database? db = await instance.database;
     return Sqflite.firstIntValue(await db!
         .rawQuery('SELECT COUNT(*) FROM $tableUser WHERE email = "$email"'));
+  }
+
+//------------------------------------------------------------------REMINDER--------------------------------------------------------------
+
+  Future<int> insertReminder(Map<String, dynamic> row) async {
+    Database? db = await instance.database;
+    return await db!.insert(tableReminder, row);
+  }
+
+  Future<int?> queryRowCountReminder() async {
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(
+        await db!.rawQuery('SELECT COUNT(*) FROM $tableReminder'));
+  }
+
+  Future<int?> titleexist(String title) async {
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(await db!.rawQuery(
+        'SELECT COUNT(*) FROM $tableReminder WHERE title = "$title"'));
   }
 }

@@ -1,18 +1,19 @@
-// ignore: duplicate_ignore
-// ignore: file_names
-// ignore_for_file: file_names
+// ignore_for_file: unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:camera/camera.dart';
+import 'package:project_flutter/notification/notification_api.dart';
 import 'package:project_flutter/ui/rechercher.dart';
 import 'package:project_flutter/ui/accueil.dart';
 import 'package:camera/camera.dart';
+import '../notification/notification.dart';
 import 'package:project_flutter/ui/voirphoto.dart';
 import 'package:project_flutter/ui/widgets/reminderDisplay.dart';
 import 'package:project_flutter/modele/reminder.dart';
 import 'camera.dart';
 import 'package:project_flutter/ui/create_reminder.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 class principale extends StatefulWidget {
   static String routeName = '/principale';
@@ -40,8 +41,15 @@ class _principaleState extends State<principale> {
 
   static List<String> Photo = ['Photo1', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2'];
 
-  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'];
+
+  static List<String> url = [
+    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg',
+    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg',
+    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'
+  ];
 
   final List<Photo1> photodata = List.generate(
       Photo.length,
@@ -89,6 +97,8 @@ class _principaleState extends State<principale> {
     });
   }
 
+//===============================================================================================================);
+
 //===============================================================================================================
 //=========================================  Scrolling Photos ===================================================
 //===============================================================================================================
@@ -123,14 +133,19 @@ class _principaleState extends State<principale> {
     'Paramètres',
     'Deconnexion',
   ];
+  
+  BuildContext? _context;
 
-  void onSelect(item) {
+  Future<void> onSelect(item) async {
     switch (item) {
       case 'Paramètres':
-        print('Paramètres clicked');
+        //createNotificationSTP();
+        //DateTime.utc(2022,6,1,16);
+        createReminderNotification(DateTime.now(),'a','b');
         break;
       case 'Deconnexion':
-        print('Deconnexion clicked');
+          Navigator.push(_context!,
+            MaterialPageRoute(builder: (context) => accueil()));
         break;
     }
   }
@@ -173,6 +188,7 @@ class _principaleState extends State<principale> {
 
   @override
   Widget build(BuildContext context) {
+    _context=context;
     return Scaffold(
 //===============================================================================================================
 //===============================================================================================================
@@ -210,7 +226,7 @@ class _principaleState extends State<principale> {
       ),
 
 //===============================================================================================================
-//============================================= Photos ==========================================================
+//============================================= Rappels =========================================================
 //===============================================================================================================
 
       body: LayoutBuilder(builder: (context, constraints) {
@@ -220,20 +236,75 @@ class _principaleState extends State<principale> {
               child: Container(
                 height: MediaQuery.of(context).size.height - 100,
                 color: const Color.fromARGB(255, 233, 233, 233),
-
                 child: Column(
                   children: [
+                    SizedBox(height: 30),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),
-                    Container(
-                      color: const Color.fromARGB(255, 233, 233, 233),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width* 0.95,
-                      child: const Text('Mes Rappels', textAlign: TextAlign.left, overflow: 
-                      TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
-                    ),
+                        color: const Color.fromARGB(255, 233, 233, 233),
+                        height: MediaQuery.of(context).size.height * 0.03,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Text(
+                          'Mes Rappels',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                        )),
+                    Expanded(
+                        child: ListView.separated(
+                      controller: _scrollController,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index < items.length) {
+                          return ListTile(
+                            leading: const Icon(Icons.alarm),
+                            title: Text(reminderdata[index].title),
+                            subtitle: Text(reminderdata[index].comment),
+                            // ),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ReminderDetail(
+                                        reminder1: reminderdata[index],
+                                      )));
+                            },
+                          );
+                        } else {
+                          return Container(
+                            width: constraints.maxWidth,
+                            height: 50,
+                            child: Center(
+                              child: Text("Plus de rappels"),
+                            ),
+                          );
+                        }
+                      },
+                      itemCount: items.length + (allLoaded ? 1 : 0),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Divider(
+                          height: 1,
+                        );
+                      },
+                    )),
 
+//===============================================================================================================
+//============================================= Photos ==========================================================
+//===============================================================================================================
+
+                    SizedBox(height: 30),
+                    Container(
+                        color: const Color.fromARGB(255, 233, 233, 233),
+                        height: MediaQuery.of(context).size.height * 0.03,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Text(
+                          'Mes Photos',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                        )),
                     Expanded(
                       child: Stack(
                         children: [

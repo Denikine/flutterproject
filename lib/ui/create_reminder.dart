@@ -7,6 +7,7 @@ import 'package:project_flutter/modele/database_helper.dart';
 import 'package:textfield_datepicker/textfield_dateAndTimePicker.dart';
 import 'package:intl/intl.dart';
 import 'package:project_flutter/modele/reminder.dart';
+import 'package:project_flutter/notification/notification.dart';
 
 class TextFieldDateTimePicker extends StatefulWidget {
   static const routeName = '/create_rappel';
@@ -18,13 +19,16 @@ class TextFieldDateTimePicker extends StatefulWidget {
       _TextFieldDateTimePickerState();
 }
 
+DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+String string = dateFormat.format(DateTime.now());
+
 class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   DatabaseHelper db = DatabaseHelper.instance;
   final Map<String, dynamic> _formData = {'Title': null, 'Description': null};
   final _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String title, comment;
-  late DateTime date;
+  late DateTime date = DateTime.now();
   bool error = false;
 
   @override
@@ -49,7 +53,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
         body: SingleChildScrollView(
             child: Container(
           child: Form(
-            key: _formKey,
+            key: _formKey, // to validate the form
             child: Column(
               children: [
                 Padding(
@@ -74,9 +78,11 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                       labelText: 'Renseignez votre titre',
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: Color.fromRGBO(75, 75, 75, 1)),
+                          //fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(55, 75, 75, 75)),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(55, 75, 75, 75)),
                       ),
                     ),
                   ),
@@ -99,10 +105,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     materialDatePickerFirstDate: DateTime.now(),
                     materialDatePickerInitialDate: DateTime.now(),
                     materialDatePickerLastDate: DateTime(2099),
-                    preferredDateFormat: DateFormat.yMMMEd(),
-                    materialTimePickerUse24hrFormat: false,
+                    preferredDateFormat: DateFormat.yMd(),
+                    materialTimePickerUse24hrFormat: true,
                     cupertinoTimePickerMinuteInterval: 1,
-                    cupertinoTimePickerUse24hFormat: false,
+                    cupertinoTimePickerUse24hFormat: true,
                     textfieldDateAndTimePickerController: _controller,
                     style: TextStyle(
                       fontSize: displayWidth(context) * 0.040,
@@ -111,6 +117,12 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     ),
                     textCapitalization: TextCapitalization.sentences,
                     cursorColor: Colors.black,
+                    onSaved: (String? val) {
+                      String? temporaire = val?.replaceAll("/", "-");
+                      temporaire=temporaire!.substring(0, temporaire.length - 1);
+                      temporaire = "$temporaire:00";
+                      date = new DateFormat('MM-dd-yyyy HH:mm:ss').parse(temporaire);
+                    },
                     decoration: InputDecoration(
                       //errorText: errorTextValue,
                       helperStyle: TextStyle(
@@ -140,10 +152,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     materialInitialTime: TimeOfDay.now(),
                   ),
                 ),
-                const LabelText(labelValue: "Commentaire"),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
+                const LabelText(labelValue: "Commentaire"),
                 Container(
                   width: 320,
                   child: TextFormField(
@@ -159,7 +171,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                           //fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(75, 75, 75, 1)),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(55, 75, 75, 75)),
                       ),
                     ),
                   ),
@@ -181,6 +194,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     ),
                   ),
                 ),
+                SizedBox(height: 40, width: 220, child: _buildSubmitButton())
               ],
             ),
           ),
@@ -190,7 +204,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print(_formData);
+      _createNewReminder(context);
+      //print(_formData);
 
       //_sendform(context);
     }
@@ -198,11 +213,36 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(const Color.fromRGBO(75, 75, 75, 1))),
       onPressed: () {
         _submitForm();
       },
-      child: const Text('SEND'),
+      child: const Text('Enregistrer'),
     );
+  }
+
+  void _createNewReminder(BuildContext context) async {
+    // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
+
+    String id = Uuid().v4();
+    String string = dateFormat.format(date);
+    print("fezfezfze");
+    print(string);
+    int? nb = await db.titleexist(title);
+    if (nb! > 0) {
+      setState(() {
+        error = true;
+      });
+    } else {
+      await db
+          .insertReminder(Reminder(id, title, string, comment).toMap())
+          .then((_) {
+        createReminderNotification(date, title, comment);
+        Navigator.pop(context); // retour a la connexion
+      });
+    }
   }
 
   // void _sendform(BuildContext context) async {
