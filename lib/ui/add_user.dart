@@ -66,151 +66,155 @@ class _AddUserState extends State<AddUser> {
                   width: MediaQuery.of(context).size.width * 0.80,
                   child: Column(
                     children:[
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    validator: validText,
-                    onSaved: (String ?val) {
-                      firstname = val!;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'NOM',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        validator: validText,
+                        onSaved: (String ?val) {
+                          firstname = val!;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'NOM',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(5.0),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    validator: validText,
-                    onSaved: (String ?val) {
-                      lastname = val!;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'PRENOM',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(5.0),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    validator: validateEmail,
-                    onSaved: (String ?val) {
-                      email = val!;
-                    },
-                    decoration: InputDecoration(
-                      errorText: error ? 'cet email est deja utilisé' : null,
-                      labelText: 'EMAIL',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        validator: validText,
+                        onSaved: (String ?val) {
+                          lastname = val!;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'PRENOM',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(5.0),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    validator: validText,
-                    onSaved: (String ?val) {
-                      password = val!;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'MOT DE PASSE',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(5.0),
-                  ),
-                  DateTimeField(
-                    decoration: InputDecoration(
-                      labelText: 'DATE DE NAISSANCE',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        validator: validateEmail,
+                        onSaved: (String ?val) {
+                          email = val!;
+                        },
+                        decoration: InputDecoration(
+                          errorText: error ? 'cet email est deja utilisé' : null,
+                          labelText: 'EMAIL',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
                       ),
-                    ),
-                    validator: validDate,
-                    onSaved: (DateTime ?val) {
-                      date = val!;
-                    },
-                    format: datef,
-                    onShowPicker: (context, currentValue) async {
-                      final date = await showDatePicker(
-                        context: context,
-                        firstDate: DateTime(1900),
-                        initialDate: currentValue ?? DateTime.now(),
-                        lastDate: DateTime(2100)
-                      );
-                      if (date != null) {
-                        final time = await showTimePicker(
-                        context: context,
-                        initialTime:
-                          TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-                      );
-                    return DateTimeField.combine(date, time);
-                    } else {
-                    return currentValue;
-                      }
-                    },
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(5.0),
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.phone,
-                    validator: validateMobile,
-                    onSaved: (String ?val) {
-                      phone = val!;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'TELEPHONE',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(75, 75, 75, 1)),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                      Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: new EdgeInsets.all(15.0),
-                  ),
-                  new ElevatedButton(onPressed: _validateInputs,
-                    child: new Text("Je m'inscris", style: TextStyle(color: Colors.white) ),
-                  ),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        validator: validText,
+                        onSaved: (String ?val) {
+                          password = val!;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'MOT DE PASSE',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      DateTimeField(
+                        decoration: InputDecoration(
+                          labelText: 'DATE DE NAISSANCE',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
+                        validator: validDate,
+                        onSaved: (DateTime ?val) {
+                          date = val!;
+                        },
+                        format: datef,
+                        onShowPicker: (context, currentValue) async {
+                          final date = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(1900),
+                            initialDate: currentValue ?? DateTime.now(),
+                            lastDate: DateTime(2100)
+                          );
+                          if (date != null) {
+                            final time = await showTimePicker(
+                            context: context,
+                            initialTime:
+                              TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                          );
+                        return DateTimeField.combine(date, time);
+                        } else {
+                        return currentValue;
+                          }
+                        },
+                      ),
+                      Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        validator: validateMobile,
+                        onSaved: (String ?val) {
+                          phone = val!;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'TELEPHONE',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(75, 75, 75, 1)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: new EdgeInsets.all(15.0),
+                      ),
+                      new SizedBox(
+                        width: 350.0,
+                        height: 40.0,
+                        child: new ElevatedButton(onPressed: _validateInputs,
+                          child: new Text("Je m'inscris", style: TextStyle(color: Colors.white) ),
+                        ),
+                      ),
                     ],
-                ),
+                  ),
                 ),
 
                 Container(
