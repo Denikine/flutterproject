@@ -185,6 +185,7 @@ class _principaleState extends State<principale> {
                 children: <Widget>[
                   Expanded(
                       child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ListView.separated(
                           controller: _scrollController,
@@ -241,39 +242,57 @@ class _principaleState extends State<principale> {
               // ListView pour les rappels
               Column(children: <Widget>[
                 Expanded(
-                    child: ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index < items.length) {
-                      return ListTile(
-                        title: Text(reminderdata[index].title),
-                        leading: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Text(reminderdata[index].comment),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ListView.separated(
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index < items.length) {
+                          return ListTile(
+                            title: Text(reminderdata[index].title),
+                            leading: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Text(reminderdata[index].comment),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ReminderDetail(
+                                        reminder1: reminderdata[index],
+                                      )));
+                            },
+                          );
+                        } else {
+                          return Container(
+                            width: constraints.maxWidth,
+                            height: 50,
+                            child: Center(
+                              child: Text("Plus de rappels"),
+                            ),
+                          );
+                        }
+                      },
+                      itemCount: items.length + (allLoaded ? 1 : 0),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Divider(
+                          height: 1,
+                        );
+                      },
+                    ),
+                    if (loading) ...[
+                      Positioned(
+                        left: 0,
+                        bottom: 0,
+                        child: Container(
+                          width: constraints.maxWidth,
+                          height: 80,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ReminderDetail(
-                                    reminder1: reminderdata[index],
-                                  )));
-                        },
-                      );
-                    } else {
-                      return Container(
-                        width: constraints.maxWidth,
-                        height: 50,
-                        child: Center(
-                          child: Text("Plus de rappels"),
-                        ),
-                      );
-                    }
-                  },
-                  itemCount: items.length + (allLoaded ? 1 : 0),
-                  separatorBuilder: (BuildContext context, int index) {
-                    return Divider(
-                      height: 1,
-                    );
-                  },
+                      ),
+                    ],
+                  ],
                 ))
               ])
             ],
