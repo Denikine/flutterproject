@@ -251,11 +251,11 @@ class _principaleState extends State<principale> {
                             itemBuilder: (context, index1) {
                               if (index1 < itemsrappels.length) {
                                 return ListTile(
-                                  title: Text(reminderdata[index1].title),
-                                  leading: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: Text(reminderdata[index1].comment),
+                                  title: Text(reminderdata[index1].date, textAlign: TextAlign.right,),
+                                  leading: Container( 
+                                    width: MediaQuery.of(context).size.width * 0.7,
+                                    color: Color.fromARGB(255, 233, 233, 233),
+                                    child: Text(reminderdata[index1].title, textAlign: TextAlign.left,),
                                   ),
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
@@ -269,7 +269,7 @@ class _principaleState extends State<principale> {
                                   width: constraints.maxWidth,
                                   height: 50,
                                   child: Center(
-                                    child: Text("Plus de rappels"),
+                                    child: Text("Fin des rappels"),
                                   ),
                                 );
                               }
@@ -332,7 +332,7 @@ class _principaleState extends State<principale> {
                                   width: constraints.maxWidth,
                                   height: 50,
                                   child: Center(
-                                    child: Text("Plus aucunes images"),
+                                    child: Text("Fin des images"),
                                   ),
                                 );
                               }
@@ -359,7 +359,10 @@ class _principaleState extends State<principale> {
                           ],
                         ],
                       ), 
-                    ),                     
+                    ), 
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.03,
+                    ),                    
                   ],
                 ),
               ),
@@ -383,9 +386,10 @@ class _principaleState extends State<principale> {
       bottomNavigationBar: PreferredSize(
         preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: BottomNavigationBar(
-          backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
-          selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
-          unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+          backgroundColor: Color.fromARGB(172, 233, 233, 233),
+          selectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
+          unselectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
+          elevation: 5,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(
@@ -399,7 +403,7 @@ class _principaleState extends State<principale> {
                     );
                   },
                   icon: const Icon(Icons.camera_alt_outlined,
-                      color: Color.fromARGB(255, 233, 233, 233))),
+                      color: Color.fromRGBO(75, 75, 75, 1))),
               label: "Photo",
             ),
             BottomNavigationBarItem(
