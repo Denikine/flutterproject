@@ -46,7 +46,7 @@ class _ListViewImagesState extends State<ListViewImages> {
       appBar: AppBar(
         title: Text('ListViewImages Demo'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.add_box),
@@ -98,7 +98,8 @@ class _ListViewImagesState extends State<ListViewImages> {
                 ),
           );
         },
-        backgroundColor: Colors.cyan,
+
+        backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
         child: Icon(Icons.camera_alt),
       ),
     );
