@@ -138,7 +138,6 @@ class _principaleState extends State<principale> {
 //===============================================================================================================
 
   var myMenuItems = <String>[
-    'Paramètres',
     'Deconnexion',
   ];
   
