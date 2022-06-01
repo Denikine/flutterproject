@@ -39,17 +39,11 @@ class _principaleState extends State<principale> {
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
 
+ 
   static List<String> Photo = ['Photo1', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2'];
 
-
-  static List<String> url = [
-    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg',
-    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg',
-    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'
-  ];
+  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'];
 
   final List<Photo1> photodata = List.generate(
       Photo.length,
@@ -96,8 +90,6 @@ class _principaleState extends State<principale> {
       allLoaded1 = true;
     });
   }
-
-//===============================================================================================================);
 
 //===============================================================================================================
 //=========================================  Scrolling Photos ===================================================
@@ -225,8 +217,9 @@ class _principaleState extends State<principale> {
         ),
       ),
 
+
 //===============================================================================================================
-//============================================= Rappels =========================================================
+//============================================= Photos ==========================================================
 //===============================================================================================================
 
       body: LayoutBuilder(builder: (context, constraints) {
@@ -236,75 +229,20 @@ class _principaleState extends State<principale> {
               child: Container(
                 height: MediaQuery.of(context).size.height - 100,
                 color: const Color.fromARGB(255, 233, 233, 233),
+
                 child: Column(
                   children: [
-                    SizedBox(height: 30),
                     Container(
-                        color: const Color.fromARGB(255, 233, 233, 233),
-                        height: MediaQuery.of(context).size.height * 0.03,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Text(
-                          'Mes Rappels',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Color.fromRGBO(75, 75, 75, 1)),
-                        )),
-                    Expanded(
-                        child: ListView.separated(
-                      controller: _scrollController,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index < items.length) {
-                          return ListTile(
-                            leading: const Icon(Icons.alarm),
-                            title: Text(reminderdata[index].title),
-                            subtitle: Text(reminderdata[index].comment),
-                            // ),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ReminderDetail(
-                                        reminder1: reminderdata[index],
-                                      )));
-                            },
-                          );
-                        } else {
-                          return Container(
-                            width: constraints.maxWidth,
-                            height: 50,
-                            child: Center(
-                              child: Text("Plus de rappels"),
-                            ),
-                          );
-                        }
-                      },
-                      itemCount: items.length + (allLoaded ? 1 : 0),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Divider(
-                          height: 1,
-                        );
-                      },
-                    )),
-
-//===============================================================================================================
-//============================================= Photos ==========================================================
-//===============================================================================================================
-
-                    SizedBox(height: 30),
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
                     Container(
-                        color: const Color.fromARGB(255, 233, 233, 233),
-                        height: MediaQuery.of(context).size.height * 0.03,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Text(
-                          'Mes Photos',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Color.fromRGBO(75, 75, 75, 1)),
-                        )),
+                      color: const Color.fromARGB(255, 233, 233, 233),
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text('Mes Rappels', textAlign: TextAlign.center, overflow: 
+                      TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
+                    ),
+
                     Expanded(
                       child: Stack(
                         children: [
@@ -317,7 +255,7 @@ class _principaleState extends State<principale> {
                                   leading: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: Text(reminderdata[index1].comment, textAlign: TextAlign.center),
+                                    child: Text(reminderdata[index1].comment),
                                   ),
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
@@ -331,8 +269,7 @@ class _principaleState extends State<principale> {
                                   width: constraints.maxWidth,
                                   height: 50,
                                   child: Center(
-                                    child: Text("Plus de rappels", textAlign: TextAlign.left, overflow: 
-                                    TextOverflow.ellipsis, style: TextStyle(fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                                    child: Text("Plus de rappels"),
                                   ),
                                 );
                               }
@@ -363,9 +300,9 @@ class _principaleState extends State<principale> {
 
                     Container(
                       color: const Color.fromARGB(255, 233, 233, 233),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: const Text('Mes Photos', textAlign: TextAlign.left, overflow: 
+                      height: MediaQuery.of(context).size.height * 0.03,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text('Mes Photos', textAlign: TextAlign.center, overflow: 
                       TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
                     ), 
 
@@ -392,11 +329,10 @@ class _principaleState extends State<principale> {
                                 );
                               } else {
                                 return Container(
-                                  width: MediaQuery.of(context).size.width * 0.95,
+                                  width: constraints.maxWidth,
                                   height: 50,
                                   child: Center(
-                                    child: Text("Plus d'images", textAlign: TextAlign.left, overflow: 
-                                    TextOverflow.ellipsis, style: TextStyle(fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                                    child: Text("Plus aucunes images"),
                                   ),
                                 );
                               }
@@ -423,10 +359,7 @@ class _principaleState extends State<principale> {
                           ],
                         ],
                       ), 
-                    ),  
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),                   
+                    ),                     
                   ],
                 ),
               ),
@@ -450,10 +383,9 @@ class _principaleState extends State<principale> {
       bottomNavigationBar: PreferredSize(
         preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(147, 233, 233, 233),
-          selectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
-          unselectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
-          elevation: 4.0,
+          backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
+          selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+          unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(
@@ -467,7 +399,7 @@ class _principaleState extends State<principale> {
                     );
                   },
                   icon: const Icon(Icons.camera_alt_outlined,
-                      color: Color.fromRGBO(75, 75, 75, 1))),
+                      color: Color.fromARGB(255, 233, 233, 233))),
               label: "Photo",
             ),
             BottomNavigationBarItem(
