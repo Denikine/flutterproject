@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:project_flutter/ui/add_user.dart';
 import 'package:project_flutter/ui/connexion.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 class accueil extends StatelessWidget {
 
   const accueil({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

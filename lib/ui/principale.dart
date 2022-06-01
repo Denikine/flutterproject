@@ -1,30 +1,36 @@
-// ignore: duplicate_ignore
-// ignore: file_names
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:project_flutter/main.dart';
 import 'package:camera/camera.dart';
+import 'package:project_flutter/notification/notification_api.dart';
 import 'package:project_flutter/ui/rechercher.dart';
 import 'package:project_flutter/ui/accueil.dart';
 import 'package:camera/camera.dart';
-
+import '../notification/notification.dart';
 import 'camera.dart';
 import 'package:project_flutter/ui/create_reminder.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 class principale extends StatelessWidget {
+
+
+  
   var myMenuItems = <String>[
     'Paramètres',
     'Deconnexion',
   ];
+  
+  BuildContext? _context;
 
-  void onSelect(item) {
+  Future<void> onSelect(item) async {
     switch (item) {
       case 'Paramètres':
-        print('Paramètres clicked');
+        //createNotificationSTP();
+        //DateTime.utc(2022,6,1,16);
+        createReminderNotification(DateTime.now(),'a','b');
         break;
       case 'Deconnexion':
-        print('Deconnexion clicked');
+          Navigator.push(_context!,
+            MaterialPageRoute(builder: (context) => accueil()));
         break;
     }
   }
@@ -36,6 +42,7 @@ class principale extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _context=context;
     return Scaffold(
 //===============================================================================================================
 //===============================================================================================================
