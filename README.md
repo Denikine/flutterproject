@@ -2,15 +2,13 @@
 
 Notre projet Flutter : l'application RemindMe.
 
-## Getting Started
+## L'équipe
 
-This project is a starting point for a Flutter application.
+* Tugdual HAREL
+* Fabien GAGEY
+* Hugo REBOUL
 
-A few resources to get you started if this is your first Flutter project:
+## Le cadre
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Réalisation d'une application en utilisant Flutter.
+Notre application RemindMe permet la connexion à un compte utilisateur, la prise de photos et leur sauvegarde ainsi que leur visualisation, et enfin la création de rappels et l'affichage de notifications.
