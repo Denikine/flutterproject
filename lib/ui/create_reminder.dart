@@ -30,7 +30,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 233, 233, 233),
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
           elevation: 7,
@@ -40,7 +40,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
             'Créer un rappel',
             style: TextStyle(
               fontSize: displayWidth(context) * 0.045,
-              color: Colors.white,
+              color: Color.fromARGB(255, 233, 233, 233),
               //selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
               //unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
             ),
@@ -74,8 +74,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                       labelText: 'Renseignez votre titre',
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(55, 75, 75, 75)),
+                          color: Color.fromRGBO(75, 75, 75, 1)),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.lightBlue),
                       ),
@@ -91,7 +90,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                 Container(
                   width: 320,
                   child: TextfieldDateAndTimePicker(
-                    cupertinoDatePickerBackgroundColor: Colors.white,
+                    cupertinoDatePickerBackgroundColor: Color.fromARGB(255, 233, 233, 233),
                     cupertinoDatePickerMaximumDate: DateTime(2099),
                     cupertinoDatePickerMaximumYear: 2099,
                     cupertinoDatePickerMinimumYear: 1990,
@@ -158,7 +157,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
                           //fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(55, 75, 75, 75)),
+                          color: Color.fromRGBO(75, 75, 75, 1)),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.lightBlue),
                       ),
@@ -178,8 +177,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   },
                   child: const Text(
                     "Enregistrer",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1),
                     ),
                   ),
                 ),

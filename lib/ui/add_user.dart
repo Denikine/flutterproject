@@ -76,7 +76,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'NOM',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -96,7 +95,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'PRENOM',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -117,7 +115,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'EMAIL',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -138,7 +135,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'MOT DE PASSE',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -153,7 +149,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'DATE DE NAISSANCE',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -196,7 +191,6 @@ class _AddUserState extends State<AddUser> {
                           labelText: 'TELEPHONE',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(75, 75, 75, 1)),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue),
@@ -211,6 +205,7 @@ class _AddUserState extends State<AddUser> {
                         height: 40.0,
                         child: new ElevatedButton(onPressed: _validateInputs,
                           child: new Text("Je m'inscris", style: TextStyle(color: Colors.white) ),
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(75, 75, 75, 1))),
                         ),
                       ),
                     ],

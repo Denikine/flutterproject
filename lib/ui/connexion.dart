@@ -68,7 +68,6 @@ class ConnexionState extends State<Connexion> {
                         labelText: 'EMAIL',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
                             color: Color.fromRGBO(75, 75, 75, 1)),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.lightBlue),
@@ -84,7 +83,6 @@ class ConnexionState extends State<Connexion> {
                       labelText: 'MOT DE PASSE',
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(75, 75, 75, 1)),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.lightBlue),
@@ -104,7 +102,6 @@ class ConnexionState extends State<Connexion> {
                         "Pas de compte ? S'inscrire",
                         style: TextStyle(
                             color: Color.fromRGBO(75, 75, 75, 1),
-                            fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
                             decoration: TextDecoration.underline),
                       ),
@@ -128,8 +125,9 @@ class ConnexionState extends State<Connexion> {
                           debugPrint("debug");
                           connexion();
                         },
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(75, 75, 75, 1))),
                         child: Center(
-                          child: const Text("Continuer", style: TextStyle(color: Colors.white)),
+                          child: const Text("Continuer", style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
 
                         ),
                       ),

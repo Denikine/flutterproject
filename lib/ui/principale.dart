@@ -38,9 +38,9 @@ class _principaleState extends State<principale> {
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
 
-  static List<String> Photo = ['Photo1', 'photo2'];
+  static List<String> Photo = ['Photo1', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2', 'photo2'];
 
-  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 
+  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 
             'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'];
 
   final List<Photo1> photodata = List.generate(
@@ -52,19 +52,45 @@ class _principaleState extends State<principale> {
 //=========================================  Liste rappels ======================================================
 //===============================================================================================================
 
-  static List<String> Reminder = ['Rappel1', 'Rappel2'];
-  static List<String> title = ['rappel1', 'rappel2'];
-  static List<String> date = ['27/08/1998', '30-05-2020'];
-  static List<String> time = ['10:51', '08:17'];
-  static List<String> comment = ['Commentaire1', 'Commentaire2'];
+  static List<String> Reminder = ['Rappel1', 'Rappel2', 'Rappel3'];
+  static List<String> title = ['rappel1', 'rappel2', 'rappel2'];
+  static List<String> date = ['27/08/1998', '30-05-2020', '30-05-2020'];
+  static List<String> time = ['10:51', '08:17', '08:17'];
+  static List<String> comment = ['Commentaire1', 'Commentaire2', 'Commentaire2'];
 
   final List<Reminder1> reminderdata = List.generate(
       Reminder.length,
-      (index) => Reminder1('${title[index]}', '${comment[index]}',
-          '${date[index]}', '${time[index]} Description...'));
+      (index1) => Reminder1('${title[index1]}', '${comment[index1]}',
+          '${date[index1]}', '${time[index1]} Description...'));
 
 //===============================================================================================================
-//=========================================  Scrolling  =========================================================
+//=========================================  Scrolling Rappels ==================================================
+//===============================================================================================================
+
+  final ScrollController _scrollController1 = ScrollController();
+  List<String> itemsrappels = [];
+  bool loading1 = false, allLoaded1 = false;
+
+  mockFetch1() async {
+    if (allLoaded1) {
+      return;
+    }
+    setState(() {
+      loading1 = true;
+    });
+    await Future.delayed(Duration(milliseconds: 500));
+    List<String> newData1 = Reminder;
+    if (newData1.isNotEmpty) {
+      itemsrappels.addAll(Reminder);
+    }
+    setState(() {
+      loading1 = false;
+      allLoaded1 = true;
+    });
+  }
+
+//===============================================================================================================
+//=========================================  Scrolling Photos ===================================================
 //===============================================================================================================
 
   final ScrollController _scrollController = ScrollController();
@@ -85,7 +111,7 @@ class _principaleState extends State<principale> {
     }
     setState(() {
       loading = false;
-      allLoaded = newData.isEmpty;
+      allLoaded = true;
     });
   }
 
@@ -110,16 +136,30 @@ class _principaleState extends State<principale> {
   }
 
 //===============================================================================================================
+//=========================================== Rappel ============================================================
+//===============================================================================================================
+  @override
+  void dispose1() {
+    super.dispose();
+    _scrollController1.dispose();
+  }
+
+//===============================================================================================================
+//=========================================== Photos ============================================================
 //===============================================================================================================
 
   @override
   void initState() {
     super.initState();
     mockFetch();
+    mockFetch1();
+    _scrollController1.addListener(() {
+      if (_scrollController1.position.pixels >= _scrollController1.position.maxScrollExtent && !loading1) {
+        mockFetch1();
+      }
+    });
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent &&
-          !loading) {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent && !loading) {
         mockFetch();
       }
     });
@@ -144,16 +184,15 @@ class _principaleState extends State<principale> {
         preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+          backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
           centerTitle: true,
           title: const Text(
             'RemindMe',
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
                 fontSize: 30,
-                color: Color.fromRGBO(75, 75, 75, 1)),
+                color: Color.fromARGB(255, 233, 233, 233)),
           ),
           actions: <Widget>[
             PopupMenuButton<String>(
@@ -185,96 +224,138 @@ class _principaleState extends State<principale> {
                 child: Column(
                   children: [
                     Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    Container(
                       color: const Color.fromARGB(255, 233, 233, 233),
-                      height: MediaQuery.of(context).size.height * 0.03,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Text('Mes Rappels', textAlign: TextAlign.center, overflow: 
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width* 0.95,
+                      child: const Text('Mes Rappels', textAlign: TextAlign.left, overflow: 
                       TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
                     ),
 
                     Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index < items.length) {
-                              return ListTile(
-                                title: Text(reminderdata[index].title),
-                                leading: SizedBox(
-                                  width: 50,
+                      child: Stack(
+                        children: [
+                          ListView.separated(
+                            controller: _scrollController1,
+                            itemBuilder: (context, index1) {
+                              if (index1 < itemsrappels.length) {
+                                return ListTile(
+                                  title: Text(reminderdata[index1].title),
+                                  leading: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Text(reminderdata[index1].comment, textAlign: TextAlign.center),
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => ReminderDetail(
+                                              reminder1: reminderdata[index1],
+                                            )));
+                                  },
+                                );
+                              } else {
+                                return Container(
+                                  width: constraints.maxWidth,
                                   height: 50,
-                                  child: Text(reminderdata[index].comment),
-                                ),
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => ReminderDetail(
-                                            reminder1: reminderdata[index],
-                                          )));
-                                },
+                                  child: Center(
+                                    child: Text("Plus de rappels", textAlign: TextAlign.left, overflow: 
+                                    TextOverflow.ellipsis, style: TextStyle(fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                                  ),
+                                );
+                              }
+                            },
+                            separatorBuilder: (BuildContext context, int index1) {
+                              return Divider(
+                                height: 1,
                               );
-                            } else {
-                              return Container(
+                            },
+                            itemCount: itemsrappels.length + (allLoaded1 ? 1 : 0),
+                          ),  
+                          if(loading1)...[
+                            Positioned(
+                              left: 0,
+                              bottom: 0,
+                              child: Container(
                                 width: constraints.maxWidth,
-                                height: 50,
+                                height: 80,
                                 child: Center(
-                                  child: Text("Plus de rappels"),
+                                  child: CircularProgressIndicator(),
                                 ),
-                              );
-                            }
-                          },
-                          itemCount: items.length + (allLoaded ? 1 : 0),
-                          separatorBuilder: (BuildContext context, int index) {
-                            return Divider(
-                              height: 1,
-                            );
-                          },
-                        )                      
+                              ),
+                            ),
+                          ],
+                        ],
+                      ), 
                     ),
 
                     Container(
                       color: const Color.fromARGB(255, 233, 233, 233),
-                      height: MediaQuery.of(context).size.height * 0.03,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Text('Mes Photos', textAlign: TextAlign.center, overflow: 
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      child: const Text('Mes Photos', textAlign: TextAlign.left, overflow: 
                       TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
                     ), 
 
                     Expanded(
-                      child: ListView.separated(
-                        controller: _scrollController,
-                        itemBuilder: (context, index) {
-                          if (index < items.length) {
-                            return ListTile(
-                              title: Text(photodata[index].name),
-                              leading: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Image.network(photodata[index].ImageURL),
+                      child: Stack(
+                        children: [
+                          ListView.separated(
+                            controller: _scrollController,
+                            itemBuilder: (context, index) {
+                              if (index < items.length) {
+                                return ListTile(
+                                  title: Text(photodata[index].name),
+                                  leading: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.network(photodata[index].ImageURL),
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => PhotoDetail(
+                                              photo1: photodata[index],
+                                            )));
+                                  },
+                                );
+                              } else {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width * 0.95,
+                                  height: 50,
+                                  child: Center(
+                                    child: Text("Plus d'images", textAlign: TextAlign.left, overflow: 
+                                    TextOverflow.ellipsis, style: TextStyle(fontSize: 15, color: Color.fromRGBO(75, 75, 75, 1)),)
+                                  ),
+                                );
+                              }
+                            },
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                height: 1,
+                              );
+                            },
+                            itemCount: items.length + (allLoaded ? 1 : 0),
+                          ),
+                          if(loading)...[
+                            Positioned(
+                              left: 0,
+                              bottom: 0,
+                              child: Container(
+                                width: constraints.maxWidth,
+                                height: 80,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                               ),
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => PhotoDetail(
-                                          photo1: photodata[index],
-                                        )));
-                              },
-                            );
-                          } else {
-                            return Container(
-                              width: constraints.maxWidth,
-                              height: 50,
-                              child: Center(
-                                child: Text("Plus aucunes images"),
-                              ),
-                            );
-                          }
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            height: 1,
-                          );
-                        },
-                        itemCount: items.length + (allLoaded ? 1 : 0)
-                      ),                     
-                    ),
-         
+                            ),
+                          ],
+                        ],
+                      ), 
+                    ),  
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),                   
                   ],
                 ),
               ),
@@ -298,9 +379,10 @@ class _principaleState extends State<principale> {
       bottomNavigationBar: PreferredSize(
         preferredSize: const Size.fromHeight(55.0), // here the desired height
         child: BottomNavigationBar(
-          backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
-          selectedItemColor: const Color.fromARGB(255, 233, 233, 233),
-          unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
+          backgroundColor: Color.fromARGB(147, 233, 233, 233),
+          selectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
+          unselectedItemColor: const Color.fromRGBO(75, 75, 75, 1),
+          elevation: 4.0,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(
@@ -314,7 +396,7 @@ class _principaleState extends State<principale> {
                     );
                   },
                   icon: const Icon(Icons.camera_alt_outlined,
-                      color: Color.fromARGB(255, 233, 233, 233))),
+                      color: Color.fromRGBO(75, 75, 75, 1))),
               label: "Photo",
             ),
             BottomNavigationBarItem(

@@ -16,3 +16,9 @@
 * créer 2 containers : un pour les rappels et un pour les photos => Fabien Tugdu
 * bandeau des images => Fabien
 * bandeau des notifications => Tugdu
+
+
+
+
+supprimer photos
+couleur fond création rappel
