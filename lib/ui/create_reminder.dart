@@ -7,6 +7,7 @@ import 'package:project_flutter/modele/database_helper.dart';
 import 'package:textfield_datepicker/textfield_dateAndTimePicker.dart';
 import 'package:intl/intl.dart';
 import 'package:project_flutter/modele/reminder.dart';
+import 'package:project_flutter/notification/notification.dart';
 
 class TextFieldDateTimePicker extends StatefulWidget {
   static const routeName = '/create_rappel';
@@ -116,6 +117,9 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     ),
                     textCapitalization: TextCapitalization.sentences,
                     cursorColor: Colors.black,
+                    onSaved: (String? val) {
+                      print(val);
+                    },
                     decoration: InputDecoration(
                       //errorText: errorTextValue,
                       helperStyle: TextStyle(
@@ -218,6 +222,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
       await db
           .insertReminder(Reminder(id, title, string, comment).toMap())
           .then((_) {
+        createReminderNotification(date, title, comment);
         Navigator.pop(context); // retour a la connexion
       });
     }
