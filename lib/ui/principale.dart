@@ -40,9 +40,7 @@ class _principaleState extends State<principale> {
 
   static List<String> Photo = ['Photo1'];
 
-  static List<String> url = [
-    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg'
-  ];
+  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg'];
 
   final List<Photo1> photodata = List.generate(
       Photo.length,
@@ -181,63 +179,53 @@ class _principaleState extends State<principale> {
         if (items.isNotEmpty) {
           return Stack(
             children: [
-              Column(
-                children: <Widget>[
-                  Expanded(
-                      child: Row(
-                    children: [
-                      ListView.separated(
-                          controller: _scrollController,
-                          itemBuilder: (context, index) {
-                            if (index < items.length) {
-                              return ListTile(
-                                title: Text(photodata[index].name),
-                                leading: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child:
-                                      Image.network(photodata[index].ImageURL),
-                                ),
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => PhotoDetail(
-                                            photo1: photodata[index],
-                                          )));
-                                },
-                              );
-                            } else {
-                              return Container(
-                                width: constraints.maxWidth,
-                                height: 50,
-                                child: Center(
-                                  child: Text("Plus aucunes images"),
-                                ),
-                              );
-                            }
-                          },
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                              height: 1,
-                            );
-                          },
-                          itemCount: items.length + (allLoaded ? 1 : 0)),
-                      if (loading) ...[
-                        Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: constraints.maxWidth,
-                            height: 80,
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
+              ListView.separated(
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    if (index < items.length) {
+                      return ListTile(
+                        title: Text(photodata[index].name),
+                        leading: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.network(photodata[index].ImageURL),
                         ),
-                      ],
-                    ],
-                  ))
-                ],
-              ),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PhotoDetail(
+                                    photo1: photodata[index],
+                                  )));
+                        },
+                      );
+                    } else {
+                      return Container(
+                        width: constraints.maxWidth,
+                        height: 50,
+                        child: Center(
+                          child: Text("Plus aucunes images"),
+                        ),
+                      );
+                    }
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      height: 1,
+                    );
+                  },
+                  itemCount: items.length + (allLoaded ? 1 : 0)),
+              if (loading) ...[
+                Positioned(
+                  left: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: constraints.maxWidth,
+                    height: 80,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ),
+              ],
               // ListView pour les rappels
               Column(children: <Widget>[
                 Expanded(
