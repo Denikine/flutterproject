@@ -93,45 +93,6 @@ class ReminderDetail extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          Row(
-            children: const [
-              SizedBox(
-                width: 40,
-              ),
-              Text(
-                'Heure : ',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(75, 75, 75, 1),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 40,
-              ),
-              Text(
-                reminder1.date,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Color.fromRGBO(75, 75, 75, 1),
-                ),
-              ),
-            ],
-          ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-            indent: 40,
-            endIndent: 40,
-            color: Color.fromARGB(52, 138, 138, 138),
-          ),
           const SizedBox(
             height: 40,
           ),
