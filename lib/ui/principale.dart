@@ -9,25 +9,31 @@ import 'package:project_flutter/ui/rechercher.dart';
 import 'package:project_flutter/ui/accueil.dart';
 import 'package:camera/camera.dart';
 import 'package:project_flutter/ui/voirphoto.dart';
-
+import 'package:project_flutter/ui/widgets/reminderDisplay.dart';
+import 'package:project_flutter/modele/reminder.dart';
 import 'camera.dart';
 import 'package:project_flutter/ui/create_reminder.dart';
 
 class principale extends StatefulWidget {
   static String routeName = '/principale';
-  principale({Key? key, required String title, required String content}): super(key: key);
+  principale({Key? key, required String title, required String content})
+      : super(key: key);
 
   @override
   _principaleState createState() => _principaleState();
 }
 
-class Photo1{
-  final String name,ImageURL,desc;
+class Photo1 {
+  final String name, ImageURL, desc;
   Photo1(this.name, this.ImageURL, this.desc);
 }
 
-class _principaleState extends State<principale> {
+class Reminder1 {
+  final String title, comment, date, time;
+  Reminder1(this.title, this.comment, this.date, this.time);
+}
 
+class _principaleState extends State<principale> {
 //===============================================================================================================
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
@@ -37,7 +43,24 @@ class _principaleState extends State<principale> {
   static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg'];
 
   final List<Photo1> photodata = List.generate(
-    Photo.length,(index) => Photo1('${Photo[index]}', '${url[index]}', '${Photo[index]} Description...'));
+      Photo.length,
+      (index) => Photo1('${Photo[index]}', '${url[index]}',
+          '${Photo[index]} Description...'));
+
+//===============================================================================================================
+//=========================================  Liste rappels ======================================================
+//===============================================================================================================
+
+  static List<String> Reminder = ['Rappel1', 'Rappel2'];
+  static List<String> title = ['rappel1', 'rappel2'];
+  static List<String> date = ['27/08/1998', '30-05-2020'];
+  static List<String> time = ['10:51', '08:17'];
+  static List<String> comment = ['Commentaire1', 'Commentaire2'];
+
+  final List<Reminder1> reminderdata = List.generate(
+      Reminder.length,
+      (index) => Reminder1('${title[index]}', '${comment[index]}',
+          '${date[index]}', '${time[index]} Description...'));
 
 //===============================================================================================================
 //=========================================  Scrolling  =========================================================
@@ -55,7 +78,7 @@ class _principaleState extends State<principale> {
       loading = true;
     });
     await Future.delayed(Duration(milliseconds: 500));
-    List<String> newData=url;
+    List<String> newData = url;
     if (newData.isNotEmpty) {
       items.addAll(url);
     }
@@ -93,7 +116,9 @@ class _principaleState extends State<principale> {
     super.initState();
     mockFetch();
     _scrollController.addListener(() {
-      if(_scrollController.position.pixels >= _scrollController.position.maxScrollExtent && !loading){
+      if (_scrollController.position.pixels >=
+              _scrollController.position.maxScrollExtent &&
+          !loading) {
         mockFetch();
       }
     });
@@ -150,72 +175,111 @@ class _principaleState extends State<principale> {
 //===============================================================================================================
 //===============================================================================================================
 
-            body: LayoutBuilder(builder: (context, constraints) {
-              if (items.isNotEmpty) {
-                return Stack(
-                  children: [
-                    ListView.separated(
-                      controller: _scrollController,
-                      itemBuilder: (context, index) {
-                        if(index<items.length){
-                          return ListTile(                          
-                            title: Text(photodata[index].name),
-                            leading: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.network(photodata[index].ImageURL),
-                            ),
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhotoDetail(photo1: photodata[index],)));
-                            },
-                          );
-                        } else {
-                          return Container(
-                            width: constraints.maxWidth,
-                            height: 50,
-                            child: Center(
-                              child: Text("Plus aucunes images"),
-                            ),
-                          );
-                        }
-                      },
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          height: 1,
-                        );
-                      },
-                      itemCount: items.length + (allLoaded?1:0)
-                    ),
-                    if(loading)...[
-                      Positioned(
-                        left: 0,
-                        bottom: 0,  
-                        child: Container(
-                          width: constraints.maxWidth,
-                          height: 80,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        if (items.isNotEmpty) {
+          return Stack(
+            children: [
+              ListView.separated(
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    if (index < items.length) {
+                      return ListTile(
+                        title: Text(photodata[index].name),
+                        leading: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.network(photodata[index].ImageURL),
                         ),
-                      ),
-                    ],
-                  ],
-                );
-              } else {
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PhotoDetail(
+                                    photo1: photodata[index],
+                                  )));
+                        },
+                      );
+                    } else {
+                      return Container(
+                        width: constraints.maxWidth,
+                        height: 50,
+                        child: Center(
+                          child: Text("Plus aucunes images"),
+                        ),
+                      );
+                    }
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      height: 1,
+                    );
+                  },
+                  itemCount: items.length + (allLoaded ? 1 : 0)),
+              if (loading) ...[
+                Positioned(
+                  left: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: constraints.maxWidth,
+                    height: 80,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
-                );
-              }
-            }),              
+                ),
+              ],
+              // ListView pour les rappels
+              Column(children: <Widget>[
+                Expanded(
+                    child: ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index < items.length) {
+                      return ListTile(
+                        title: Text(reminderdata[index].title),
+                        leading: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Text(reminderdata[index].comment),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ReminderDetail(
+                                    reminder1: reminderdata[index],
+                                  )));
+                        },
+                      );
+                    } else {
+                      return Container(
+                        width: constraints.maxWidth,
+                        height: 50,
+                        child: Center(
+                          child: Text("Plus de rappels"),
+                        ),
+                      );
+                    }
+                  },
+                  itemCount: items.length + (allLoaded ? 1 : 0),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider(
+                      height: 1,
+                    );
+                  },
+                ))
+              ])
+            ],
+          );
+        } else {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      }),
 
 //===============================================================================================================
 //===============================================================================================================
-//=================================BottomBar : Rechercher et Créer ==============================================
+//================================ BottomBar : Créer Photo et Rappel ============================================
 //===============================================================================================================
 //===============================================================================================================
-
 
       bottomNavigationBar: PreferredSize(
         preferredSize: const Size.fromHeight(55.0), // here the desired height
@@ -225,12 +289,18 @@ class _principaleState extends State<principale> {
           unselectedItemColor: const Color.fromARGB(255, 233, 233, 233),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: IconButton(onPressed: () {
-                Navigator.push( context, MaterialPageRoute(
-                    builder: (context) => CameraScreen(cameras: cameras) // on passe la camera
-                        ),
-                  );
-              }, icon: const Icon(Icons.camera_alt_outlined, color: Color.fromARGB(255, 233, 233, 233))),
+              icon: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CameraScreen(
+                              cameras: cameras) // on passe la camera
+                          ),
+                    );
+                  },
+                  icon: const Icon(Icons.camera_alt_outlined,
+                      color: Color.fromARGB(255, 233, 233, 233))),
               label: "Photo",
             ),
             BottomNavigationBarItem(
