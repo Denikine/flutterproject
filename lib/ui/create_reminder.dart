@@ -105,10 +105,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     materialDatePickerFirstDate: DateTime.now(),
                     materialDatePickerInitialDate: DateTime.now(),
                     materialDatePickerLastDate: DateTime(2099),
-                    preferredDateFormat: DateFormat.yMMMEd(),
-                    materialTimePickerUse24hrFormat: false,
+                    preferredDateFormat: DateFormat.yMd(),
+                    materialTimePickerUse24hrFormat: true,
                     cupertinoTimePickerMinuteInterval: 1,
-                    cupertinoTimePickerUse24hFormat: false,
+                    cupertinoTimePickerUse24hFormat: true,
                     textfieldDateAndTimePickerController: _controller,
                     style: TextStyle(
                       fontSize: displayWidth(context) * 0.040,
@@ -118,7 +118,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     textCapitalization: TextCapitalization.sentences,
                     cursorColor: Colors.black,
                     onSaved: (String? val) {
-                      print(val);
+                      String? temporaire = val?.replaceAll("/", "-");
+                      temporaire=temporaire!.substring(0, temporaire.length - 1);
+                      temporaire = "$temporaire:00";
+                      date = new DateFormat('MM-dd-yyyy HH:mm:ss').parse(temporaire);
                     },
                     decoration: InputDecoration(
                       //errorText: errorTextValue,
@@ -212,7 +215,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
 
     String id = Uuid().v4();
     String string = dateFormat.format(date);
-
+    print("fezfezfze");
+    print(string);
     int? nb = await db.titleexist(title);
     if (nb! > 0) {
       setState(() {
