@@ -58,3 +58,4 @@ windows/
 macos/
 *.cmake
 .vs/
+*.swift
