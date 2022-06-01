@@ -12,7 +12,7 @@ class CameraScreen extends StatefulWidget {
 
   //CameraScreen(this.cameras); // constructeur
   CameraScreen({
-    Key ?key,
+    Key? key,
     required this.cameras,
   }) : super(key: key);
 
@@ -46,7 +46,10 @@ class CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Prenez une photo')),
+      appBar: AppBar(
+        title: const Text('Prenez une photo'),
+        backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
+      ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
