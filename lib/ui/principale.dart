@@ -38,11 +38,10 @@ class _principaleState extends State<principale> {
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
 
-  static List<String> Photo = ['Photo1'];
+  static List<String> Photo = ['Photo1', 'photo2'];
 
-  static List<String> url = [
-    'https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg'
-  ];
+  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'];
 
   final List<Photo1> photodata = List.generate(
       Photo.length,
@@ -172,37 +171,42 @@ class _principaleState extends State<principale> {
       ),
 
 //===============================================================================================================
-//===============================================================================================================
-//===============================================================================================================
-//===============================================================================================================
+//============================================= Photos ==========================================================
 //===============================================================================================================
 
       body: LayoutBuilder(builder: (context, constraints) {
         if (items.isNotEmpty) {
-          return Stack(
-            children: [
-              Column(
-                children: <Widget>[
-                  Expanded(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ListView.separated(
-                          controller: _scrollController,
-                          itemBuilder: (context, index) {
+          return Scaffold(
+            body: Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height - 100,
+                color: const Color.fromARGB(255, 233, 233, 233),
+
+                child: Column(
+                  children: [
+                    Container(
+                      color: const Color.fromARGB(255, 233, 233, 233),
+                      height: MediaQuery.of(context).size.height * 0.03,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text('Mes Rappels', textAlign: TextAlign.center, overflow: 
+                      TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
+                    ),
+
+                    Expanded(
+                      child: ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
                             if (index < items.length) {
                               return ListTile(
-                                title: Text(photodata[index].name),
+                                title: Text(reminderdata[index].title),
                                 leading: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child:
-                                      Image.network(photodata[index].ImageURL),
+                                  child: Text(reminderdata[index].comment),
                                 ),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => PhotoDetail(
-                                            photo1: photodata[index],
+                                      builder: (context) => ReminderDetail(
+                                            reminder1: reminderdata[index],
                                           )));
                                 },
                               );
@@ -211,91 +215,70 @@ class _principaleState extends State<principale> {
                                 width: constraints.maxWidth,
                                 height: 50,
                                 child: Center(
-                                  child: Text("Plus aucunes images"),
+                                  child: Text("Plus de rappels"),
                                 ),
                               );
                             }
                           },
-                          separatorBuilder: (context, index) {
+                          itemCount: items.length + (allLoaded ? 1 : 0),
+                          separatorBuilder: (BuildContext context, int index) {
                             return Divider(
                               height: 1,
                             );
                           },
-                          itemCount: items.length + (allLoaded ? 1 : 0)),
-                      if (loading) ...[
-                        Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: constraints.maxWidth,
-                            height: 80,
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ))
-                ],
-              ),
-              // ListView pour les rappels
-              Column(children: <Widget>[
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ListView.separated(
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index < items.length) {
-                          return ListTile(
-                            title: Text(reminderdata[index].title),
-                            leading: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Text(reminderdata[index].comment),
-                            ),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ReminderDetail(
-                                        reminder1: reminderdata[index],
-                                      )));
-                            },
-                          );
-                        } else {
-                          return Container(
-                            width: constraints.maxWidth,
-                            height: 50,
-                            child: Center(
-                              child: Text("Plus de rappels"),
-                            ),
-                          );
-                        }
-                      },
-                      itemCount: items.length + (allLoaded ? 1 : 0),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Divider(
-                          height: 1,
-                        );
-                      },
+                        )                      
                     ),
-                    if (loading) ...[
-                      Positioned(
-                        left: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: constraints.maxWidth,
-                          height: 80,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      ),
-                    ],
+
+                    Container(
+                      color: const Color.fromARGB(255, 233, 233, 233),
+                      height: MediaQuery.of(context).size.height * 0.03,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text('Mes Photos', textAlign: TextAlign.center, overflow: 
+                      TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromRGBO(75, 75, 75, 1)),)
+                    ), 
+
+                    Expanded(
+                      child: ListView.separated(
+                        controller: _scrollController,
+                        itemBuilder: (context, index) {
+                          if (index < items.length) {
+                            return ListTile(
+                              title: Text(photodata[index].name),
+                              leading: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: Image.network(photodata[index].ImageURL),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PhotoDetail(
+                                          photo1: photodata[index],
+                                        )));
+                              },
+                            );
+                          } else {
+                            return Container(
+                              width: constraints.maxWidth,
+                              height: 50,
+                              child: Center(
+                                child: Text("Plus aucunes images"),
+                              ),
+                            );
+                          }
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            height: 1,
+                          );
+                        },
+                        itemCount: items.length + (allLoaded ? 1 : 0)
+                      ),                     
+                    ),
+         
                   ],
-                ))
-              ])
-            ],
+                ),
+              ),
+            ),
           );
         } else {
           return Container(
