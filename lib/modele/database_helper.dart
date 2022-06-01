@@ -25,6 +25,12 @@ class DatabaseHelper {
   static final phoneUser = 'phone';
   static final emailUser = 'email';
 
+  static final tableReminder = 'reminder_table';
+  static final idReminder = 'id';
+  static final titleReminder = 'title';
+  static final dateTimeReminder = 'date';
+  static final commentReminder = 'comment';
+
   // make this a singleton class
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
@@ -57,6 +63,15 @@ class DatabaseHelper {
         $birthdateUser TEXT NOT NULL,
         $phoneUser TEXT NULL,
         $emailUser TEXT NULL UNIQUE
+      )
+    ''');
+
+    await db.execute('''     
+      CREATE TABLE $tableReminder (
+        $idReminder TEXT PRIMARY KEY,
+        $titleReminder TEXT NOT NULL,
+        $commentReminder TEXT NOT NULL,
+        $dateTimeReminder TEXT NOT NULL,
       )
     ''');
 
@@ -164,5 +179,24 @@ class DatabaseHelper {
     Database? db = await instance.database;
     return Sqflite.firstIntValue(await db!
         .rawQuery('SELECT COUNT(*) FROM $tableUser WHERE email = "$email"'));
+  }
+
+//------------------------------------------------------------------REMINDER--------------------------------------------------------------
+
+  Future<int> insertReminder(Map<String, dynamic> row) async {
+    Database? db = await instance.database;
+    return await db!.insert(tableUser, row);
+  }
+
+  Future<int?> queryRowCountReminder() async {
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(
+        await db!.rawQuery('SELECT COUNT(*) FROM $tableReminder'));
+  }
+
+  Future<int?> titleexist(String title) async {
+    Database? db = await instance.database;
+    return Sqflite.firstIntValue(await db!.rawQuery(
+        'SELECT COUNT(*) FROM $tableReminder WHERE title = "$title"'));
   }
 }

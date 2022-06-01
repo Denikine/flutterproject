@@ -51,12 +51,14 @@ class ConnexionState extends State<Connexion> {
         child: Column(
           children: <Widget>[
             SizedBox(
-                height: MediaQuery.of(context).size.height * 0.17,
+                height: MediaQuery.of(context).size.height * 0.10,
                 width: MediaQuery.of(context).size.width,
                 child: const Text('RemindMe', textAlign: TextAlign.center, overflow: 
-                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 75, color: Color.fromRGBO(75, 75, 75, 1)),)
+                TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 55, color: Color.fromRGBO(75, 75, 75, 1)),)
               ),
             Container(
+              height: MediaQuery.of(context).size.height * 0.50,
+              width: MediaQuery.of(context).size.width * 0.8,
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Column(
                 children: <Widget>[
@@ -110,6 +112,7 @@ class ConnexionState extends State<Connexion> {
                   ),
                   SizedBox(height: 40.0),
                   Container(
+                    width: 350.0,
                     height: 40.0,
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),
@@ -135,6 +138,10 @@ class ConnexionState extends State<Connexion> {
                 ],
               ),
             ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * 0.40,
+                width: MediaQuery.of(context).size.width,
+              ),
           ],
         ),
       ),

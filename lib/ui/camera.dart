@@ -12,7 +12,7 @@ class CameraScreen extends StatefulWidget {
 
   //CameraScreen(this.cameras); // constructeur
   CameraScreen({
-    Key ?key,
+    Key? key,
     required this.cameras,
   }) : super(key: key);
 
@@ -46,7 +46,10 @@ class CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Take a picture')),
+      appBar: AppBar(
+        title: const Text('Prenez une photo'),
+        backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
+      ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -59,7 +62,10 @@ class CameraScreenState extends State<CameraScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.camera_alt),
+          backgroundColor: Color.fromRGBO(75, 75, 75, 1),
+          child: const Icon(
+            Icons.camera_alt,
+          ),
           onPressed: () async {
             try {
               await _initializeControllerFuture;

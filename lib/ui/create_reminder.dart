@@ -49,7 +49,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
         body: SingleChildScrollView(
             child: Container(
           child: Form(
-            key: _formKey,
+            key: _formKey, // to validate the form
             child: Column(
               children: [
                 Padding(
@@ -141,10 +141,10 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                     materialInitialTime: TimeOfDay.now(),
                   ),
                 ),
-                const LabelText(labelValue: "Commentaire"),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
+                const LabelText(labelValue: "Commentaire"),
                 Container(
                   width: 320,
                   child: TextFormField(
@@ -169,20 +169,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                   height: 40,
                 ),
                 //ElevatedButton(onPressed: onPressed, child: child),
-                TextButton(
-                  //backgroundColor: const Color.fromRGBO(75, 75, 75, 1),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                    }
-                  },
-                  child: const Text(
-                    "Enregistrer",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                  ),
-                ),
+                SizedBox(height: 40, width: 220, child: _buildSubmitButton())
               ],
             ),
           ),
@@ -192,6 +179,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      _createNewReminder(context);
       print(_formData);
 
       //_sendform(context);
@@ -200,11 +188,33 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
 
   Widget _buildSubmitButton() {
     return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(const Color.fromRGBO(75, 75, 75, 1))),
       onPressed: () {
         _submitForm();
       },
-      child: const Text('SEND'),
+      child: const Text('Enregistrer'),
     );
+  }
+
+  void _createNewReminder(BuildContext context) async {
+    // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
+
+    String id = Uuid().v4();
+
+    int? nb = await db.titleexist(title);
+    if (nb! > 0) {
+      setState(() {
+        error = true;
+      });
+    } else {
+      await db
+          .insertReminder(Reminder(id, title, date, comment).toMap())
+          .then((_) {
+        Navigator.pop(context); // retour a la connexion
+      });
+    }
   }
 
   // void _sendform(BuildContext context) async {

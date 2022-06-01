@@ -56,3 +56,4 @@ linux/
 windows/
 macos/
 *.cmake
+.vs/
