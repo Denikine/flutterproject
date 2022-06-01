@@ -1,7 +1,7 @@
 class Reminder {
   late String id;
   late String title;
-  late DateTime date;
+  late String date;
   late String comment;
 
   Reminder(this.id, this.title, this.date, this.comment);

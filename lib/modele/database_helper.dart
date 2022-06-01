@@ -71,7 +71,7 @@ class DatabaseHelper {
         $idReminder TEXT PRIMARY KEY,
         $titleReminder TEXT NOT NULL,
         $commentReminder TEXT NOT NULL,
-        $dateTimeReminder DATETIME NOT NULL
+        $dateTimeReminder TEXT NOT NULL
       )
     ''');
 

@@ -18,6 +18,9 @@ class TextFieldDateTimePicker extends StatefulWidget {
       _TextFieldDateTimePickerState();
 }
 
+DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+String string = dateFormat.format(DateTime.now());
+
 class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   DatabaseHelper db = DatabaseHelper.instance;
   final Map<String, dynamic> _formData = {'Title': null, 'Description': null};
@@ -182,6 +185,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       _createNewReminder(context);
+      //print(_formData);
 
       //_sendform(context);
     }
@@ -203,6 +207,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
     // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
 
     String id = Uuid().v4();
+    String string = dateFormat.format(date);
 
     int? nb = await db.titleexist(title);
     if (nb! > 0) {
@@ -211,7 +216,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
       });
     } else {
       await db
-          .insertReminder(Reminder(id, title, date, comment).toMap())
+          .insertReminder(Reminder(id, title, string, comment).toMap())
           .then((_) {
         Navigator.pop(context); // retour a la connexion
       });
