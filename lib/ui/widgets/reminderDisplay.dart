@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_flutter/ui/principale.dart';
 import 'package:project_flutter/modele/reminder.dart';
+import 'package:project_flutter/modele/database_helper.dart';
 
 class ReminderDetail extends StatelessWidget {
   final Reminder reminder1;
   const ReminderDetail({Key? key, required this.reminder1}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +32,8 @@ class ReminderDetail extends StatelessWidget {
                 icon: const Icon(Icons.delete,
                     color: Color.fromRGBO(75, 75, 75, 1), size: 24),
                 onPressed: () {
+                  DatabaseHelper db = DatabaseHelper.instance;
+                  db.deleteReminder(this.reminder1.id);
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

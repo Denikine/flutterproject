@@ -16,13 +16,15 @@ class DisplayPictureScreen extends StatelessWidget {
   //CameraScreen(this.cameras); // constructeur
 
   final String imagePath;
+  final File? image;
+
   DatabaseHelper db = DatabaseHelper.instance; // instance de la BDD
   String? id;
   String? photoname = "photo";
   String? path = "/image";
 
   DisplayPictureScreen(
-      {Key? key, required this.cameras, required this.imagePath})
+      {Key? key, required this.cameras, required this.imagePath, required this.image})
       : super(key: key);
 
   @override
@@ -45,7 +47,7 @@ class DisplayPictureScreen extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.text,
                     onSaved: (String? val) {
-                      photoname = val!;
+                      this.photoname = val!;
                     },
                     decoration: InputDecoration(
                       labelText: 'Nom de la photo',
@@ -85,10 +87,10 @@ class DisplayPictureScreen extends StatelessWidget {
 
   void _createNewImg(BuildContext context) async {
     // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
-
+    await this.image!.copy(imagePath);
     String id = Uuid().v4();
     await db
-        .insertPicture(Imagecamera(id, path!, photoname!).toMap())
+        .insertPicture(Imagecamera(id, imagePath!, this.photoname!).toMap())
         .then((_) {
       Navigator.pop(context); // retour a la connexion
     });
