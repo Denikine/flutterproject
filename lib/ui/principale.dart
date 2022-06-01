@@ -32,9 +32,9 @@ class _principaleState extends State<principale> {
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
 
-  static List<String> Photo = ['Photo1', 'photo2'];
+  static List<String> Photo = ['Photo1'];
 
-  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg'];
+  static List<String> url = ['https://cdn.sortiraparis.com/images/80/83517/753564-visuel-paris-tour-eiffel-rue.jpg'];
 
   final List<Photo1> photodata = List.generate(
     Photo.length,(index) => Photo1('${Photo[index]}', '${url[index]}', '${Photo[index]} Description...'));

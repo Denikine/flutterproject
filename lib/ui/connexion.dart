@@ -112,6 +112,7 @@ class ConnexionState extends State<Connexion> {
                   ),
                   SizedBox(height: 40.0),
                   Container(
+                    width: 350.0,
                     height: 40.0,
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),
