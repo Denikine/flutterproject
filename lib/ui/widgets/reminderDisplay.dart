@@ -3,7 +3,7 @@ import 'package:project_flutter/ui/principale.dart';
 import 'package:project_flutter/modele/reminder.dart';
 
 class ReminderDetail extends StatelessWidget {
-  final Reminder1 reminder1;
+  final Reminder reminder1;
   const ReminderDetail({Key? key, required this.reminder1}) : super(key: key);
 
   @override
@@ -114,7 +114,7 @@ class ReminderDetail extends StatelessWidget {
                 width: 40,
               ),
               Text(
-                reminder1.time,
+                reminder1.date,
                 style: const TextStyle(
                   fontSize: 20,
                   color: Color.fromRGBO(75, 75, 75, 1),

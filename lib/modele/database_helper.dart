@@ -188,6 +188,13 @@ class DatabaseHelper {
     return await db!.insert(tableReminder, row);
   }
 
+  Future<List> getAllReminder() async {
+    Database? db = await instance.database;
+    var result =
+        await db!.query(tableReminder, columns: [idReminder,titleReminder, dateTimeReminder, commentReminder]);
+    return result.toList();
+  }
+
   Future<int?> queryRowCountReminder() async {
     Database? db = await instance.database;
     return Sqflite.firstIntValue(

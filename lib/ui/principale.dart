@@ -14,9 +14,13 @@ import 'package:project_flutter/modele/reminder.dart';
 import 'camera.dart';
 import 'package:project_flutter/ui/create_reminder.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:project_flutter/modele/reminder.dart';
+import 'package:project_flutter/modele/database_helper.dart';
 
 class principale extends StatefulWidget {
   static String routeName = '/principale';
+  
+
   principale({Key? key, required String title, required String content})
       : super(key: key);
 
@@ -29,12 +33,9 @@ class Photo1 {
   Photo1(this.name, this.ImageURL, this.desc);
 }
 
-class Reminder1 {
-  final String title, comment, date, time;
-  Reminder1(this.title, this.comment, this.date, this.time);
-}
-
 class _principaleState extends State<principale> {
+
+  DatabaseHelper db = DatabaseHelper.instance;
 //===============================================================================================================
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
@@ -54,26 +55,25 @@ class _principaleState extends State<principale> {
 //=========================================  Liste rappels ======================================================
 //===============================================================================================================
 
-  static List<String> Reminder = ['Rappel1', 'Rappel2', 'Rappel3'];
+  //static List<String> Reminder = ['Rappel1', 'Rappel2', 'Rappel3'];
   static List<String> title = ['rappel1', 'rappel2', 'rappel2'];
   static List<String> date = ['27/08/1998', '30-05-2020', '30-05-2020'];
   static List<String> time = ['10:51', '08:17', '08:17'];
   static List<String> comment = ['Commentaire1', 'Commentaire2', 'Commentaire2'];
-
-  final List<Reminder1> reminderdata = List.generate(
-      Reminder.length,
-      (index1) => Reminder1('${title[index1]}', '${comment[index1]}',
-          '${date[index1]}', '${time[index1]} Description...'));
+  List<Reminder> reminderdata = [];
+  //Future<List>? reminders=null;
 
 //===============================================================================================================
 //=========================================  Scrolling Rappels ==================================================
 //===============================================================================================================
 
   final ScrollController _scrollController1 = ScrollController();
-  List<String> itemsrappels = [];
+  // ignore: non_constant_identifier_names
+  List<Reminder> Reminderlist = [];
   bool loading1 = false, allLoaded1 = false;
 
   mockFetch1() async {
+
     if (allLoaded1) {
       return;
     }
@@ -81,10 +81,26 @@ class _principaleState extends State<principale> {
       loading1 = true;
     });
     await Future.delayed(Duration(milliseconds: 500));
-    List<String> newData1 = Reminder;
-    if (newData1.isNotEmpty) {
-      itemsrappels.addAll(Reminder);
-    }
+    List<Reminder> newData1 = reminderdata;
+    int i=0;
+    // print(newData1);
+   
+      db.getAllReminder().then((notes) {
+      setState(() {
+        notes.forEach((note) {
+          i++;
+          dynamic map = {};
+          note.forEach((key, value) => map[key] = value);
+          print(map['id']);
+          Reminder temporaire = new Reminder(map['id'], map['title'], map['date'], map['comment']);
+          Reminderlist.add(temporaire);
+          print(i);
+        ;});
+      });
+    });
+    
+    print(Reminderlist);
+
     setState(() {
       loading1 = false;
       allLoaded1 = true;
@@ -157,7 +173,11 @@ class _principaleState extends State<principale> {
 
   @override
   void initState() {
+    
     super.initState();
+
+    
+
     mockFetch();
     mockFetch1();
     _scrollController1.addListener(() {
@@ -180,6 +200,7 @@ class _principaleState extends State<principale> {
 
   @override
   Widget build(BuildContext context) {
+
     _context=context;
     return Scaffold(
 //===============================================================================================================
@@ -249,18 +270,18 @@ class _principaleState extends State<principale> {
                           ListView.separated(
                             controller: _scrollController1,
                             itemBuilder: (context, index1) {
-                              if (index1 < itemsrappels.length) {
+                              if (index1 < Reminderlist.length) {
                                 return ListTile(
-                                  title: Text(reminderdata[index1].title),
+                                  title: Text(Reminderlist[index1].title),
                                   leading: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: Text(reminderdata[index1].comment),
+                                    child: Text(Reminderlist[index1].comment),
                                   ),
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => ReminderDetail(
-                                              reminder1: reminderdata[index1],
+                                              reminder1: Reminderlist[index1],
                                             )));
                                   },
                                 );
@@ -279,7 +300,7 @@ class _principaleState extends State<principale> {
                                 height: 1,
                               );
                             },
-                            itemCount: itemsrappels.length + (allLoaded1 ? 1 : 0),
+                            itemCount: Reminderlist.length + (allLoaded1 ? 1 : 0),
                           ),  
                           if(loading1)...[
                             Positioned(
