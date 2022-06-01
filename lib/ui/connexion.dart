@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:project_flutter/main.dart';
 import 'package:project_flutter/modele/database_helper.dart';
 import 'package:camera/camera.dart';
 
@@ -7,6 +8,7 @@ import 'package:project_flutter/modele/user.dart';
 import 'package:project_flutter/ui/listview_images.dart';
 import 'package:project_flutter/ui/add_user.dart';
 import 'package:project_flutter/ui/principale.dart';
+import 'package:project_flutter/ui/accueil.dart';
 
 class Connexion extends StatefulWidget {
   List<CameraDescription> cameras; //liste de cameras disponibles
@@ -158,12 +160,14 @@ class ConnexionState extends State<Connexion> {
       _validate = false;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ListViewImages(widget.cameras)),
+        MaterialPageRoute(builder: (context) => principale(content: '', title: '',)),
       );
     } else {
       debugPrint("Je suis pas connecté soon");
       setState(() {
         _validate = true;
+          Navigator.push( context,
+            MaterialPageRoute(builder: (context) => Connexion(cameras)));
       });
     } // faire un truc
   }

@@ -39,6 +39,7 @@ class DatabaseHelper {
   Database? _database;
   Future<Database?> get database async {
     if (_database != null) return _database;
+
     // lazily instantiate the db the first time it is accessed
     _database = await _initDatabase();
     return _database;
@@ -102,6 +103,14 @@ class DatabaseHelper {
     return await db!.insert(tablePictures, row);
   }
 
+    void deleteAllPicture() async {
+    Database? db = await instance.database;
+    await db!.delete(tablePictures);
+  }
+    void deletePicture(String id) async {
+    Database? db = await instance.database;
+    await db!.delete(tablePictures, where: 'id = ?', whereArgs: [id]);
+  }
   Future<int?>? queryRowCount() async {
     Database? db = await instance.database;
     return Sqflite.firstIntValue(
@@ -161,8 +170,6 @@ class DatabaseHelper {
         where: '$passworsUser = ? and  $emailUser = ?',
         whereArgs: [pwd, email]);
     if (maps.length > 0) {
-      print(maps.first);
-      print(maps.first.length);
       return User.fromMap(maps.first as Map<String, dynamic>);
     }
     debugPrint("je n'ai rien trouvé");
@@ -193,6 +200,11 @@ class DatabaseHelper {
     var result =
         await db!.query(tableReminder, columns: [idReminder,titleReminder, dateTimeReminder, commentReminder]);
     return result.toList();
+  }
+
+  void deleteReminder(String id) async {
+    Database? db = await instance.database;
+    await db!.delete(tableReminder, where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int?> queryRowCountReminder() async {

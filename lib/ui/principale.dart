@@ -16,6 +16,8 @@ import 'package:project_flutter/ui/create_reminder.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:project_flutter/modele/reminder.dart';
 import 'package:project_flutter/modele/database_helper.dart';
+import 'package:project_flutter/modele/Imagecamera.dart';
+import 'dart:io';
 
 class principale extends StatefulWidget {
   static String routeName = '/principale';
@@ -35,7 +37,7 @@ class Photo1 {
 
 class _principaleState extends State<principale> {
 
-  DatabaseHelper db = DatabaseHelper.instance;
+  
 //===============================================================================================================
 //=========================================  Liste photos  ======================================================
 //===============================================================================================================
@@ -61,6 +63,7 @@ class _principaleState extends State<principale> {
   static List<String> time = ['10:51', '08:17', '08:17'];
   static List<String> comment = ['Commentaire1', 'Commentaire2', 'Commentaire2'];
   List<Reminder> reminderdata = [];
+  List<Imagecamera> imagedata = [];
   //Future<List>? reminders=null;
 
 //===============================================================================================================
@@ -73,7 +76,7 @@ class _principaleState extends State<principale> {
   bool loading1 = false, allLoaded1 = false;
 
   mockFetch1() async {
-
+  DatabaseHelper db = DatabaseHelper.instance;
     if (allLoaded1) {
       return;
     }
@@ -83,29 +86,24 @@ class _principaleState extends State<principale> {
     await Future.delayed(Duration(milliseconds: 500));
     List<Reminder> newData1 = reminderdata;
     int i=0;
-    // print(newData1);
-   
       db.getAllReminder().then((notes) {
       setState(() {
         notes.forEach((note) {
           i++;
           dynamic map = {};
           note.forEach((key, value) => map[key] = value);
-          print(map['id']);
           Reminder temporaire = new Reminder(map['id'], map['title'], map['date'], map['comment']);
           Reminderlist.add(temporaire);
-          print(i);
         ;});
       });
     });
-    
-    print(Reminderlist);
-
     setState(() {
       loading1 = false;
       allLoaded1 = true;
     });
   }
+
+  
 
 //===============================================================================================================
 //=========================================  Scrolling Photos ===================================================
@@ -113,9 +111,11 @@ class _principaleState extends State<principale> {
 
   final ScrollController _scrollController = ScrollController();
   List<String> items = [];
+  List<Imagecamera> Imagelist = [];
   bool loading = false, allLoaded = false;
 
   mockFetch() async {
+    DatabaseHelper db = DatabaseHelper.instance;
     if (allLoaded) {
       return;
     }
@@ -123,10 +123,20 @@ class _principaleState extends State<principale> {
       loading = true;
     });
     await Future.delayed(Duration(milliseconds: 500));
-    List<String> newData = url;
-    if (newData.isNotEmpty) {
-      items.addAll(url);
-    }
+    List<Imagecamera> newData1 = imagedata;
+    int i=0;
+      db.getAllImage().then((notes) {
+      setState(() {
+        notes.forEach((note) {
+          i++;
+          dynamic map = {};
+          note.forEach((key, value) => map[key] = value);
+          Imagecamera temporaire = new Imagecamera(map['id'], map['path'], map['photoname']);
+          Imagelist.add(temporaire);
+        ;});
+      });
+    });
+
     setState(() {
       loading = false;
       allLoaded = true;
@@ -243,7 +253,7 @@ class _principaleState extends State<principale> {
 //===============================================================================================================
 
       body: LayoutBuilder(builder: (context, constraints) {
-        if (items.isNotEmpty) {
+        if (Imagelist.isNotEmpty) {
           return Scaffold(
             body: Center(
               child: Container(
@@ -332,18 +342,18 @@ class _principaleState extends State<principale> {
                           ListView.separated(
                             controller: _scrollController,
                             itemBuilder: (context, index) {
-                              if (index < items.length) {
+                              if (index < Imagelist.length) {
                                 return ListTile(
-                                  title: Text(photodata[index].name),
+                                  title: Text(Imagelist[index].photoname),
                                   leading: SizedBox(
                                     width: 50,
                                     height: 50,
-                                    child: Image.network(photodata[index].ImageURL),
+                                    child: Image.file(File(Imagelist[index].path)),
                                   ),
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => PhotoDetail(
-                                              photo1: photodata[index],
+                                              photo1: Imagelist[index],
                                             )));
                                   },
                                 );
@@ -362,7 +372,7 @@ class _principaleState extends State<principale> {
                                 height: 1,
                               );
                             },
-                            itemCount: items.length + (allLoaded ? 1 : 0),
+                            itemCount: Imagelist.length + (allLoaded ? 1 : 0),
                           ),
                           if(loading)...[
                             Positioned(

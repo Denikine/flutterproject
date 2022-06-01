@@ -1,11 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:project_flutter/ui/display_picture.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' show join;
 import 'dart:async';
+import 'dart:io';
 
 class CameraScreen extends StatefulWidget {
   List<CameraDescription> cameras; //liste de cameras disponibles
@@ -74,16 +76,23 @@ class CameraScreenState extends State<CameraScreen> {
                 (await getApplicationDocumentsDirectory()).path,
                 '${DateTime.now()}.png',
               );
+              XFile imageTempo = await controller.takePicture();
 
-              await controller.takePicture();
-              print(path);
+            File? selectedImage;
 
+
+              setState(() {
+                selectedImage = File(imageTempo.path); // won't have any error now
+              });
+              
+                            
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => DisplayPictureScreen(
                       cameras: widget.cameras,
-                      imagePath: path), //ListViewImages(widget.cameras),
+                      imagePath: path,
+                      image : selectedImage), //ListViewImages(widget.cameras),
                 ),
               );
             } catch (e) {

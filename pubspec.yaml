@@ -49,6 +49,7 @@ dependencies:
   image: ^3.2.0
   device_info: ^2.0.3
   awesome_notifications: ^0.6.21
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
