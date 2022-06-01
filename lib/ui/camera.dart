@@ -62,7 +62,10 @@ class CameraScreenState extends State<CameraScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.camera_alt),
+          backgroundColor: Color.fromRGBO(75, 75, 75, 1),
+          child: const Icon(
+            Icons.camera_alt,
+          ),
           onPressed: () async {
             try {
               await _initializeControllerFuture;
