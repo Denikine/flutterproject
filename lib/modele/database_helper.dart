@@ -185,7 +185,7 @@ class DatabaseHelper {
 
   Future<int> insertReminder(Map<String, dynamic> row) async {
     Database? db = await instance.database;
-    return await db!.insert(tablePictures, row);
+    return await db!.insert(tableReminder, row);
   }
 
   Future<int?> queryRowCountReminder() async {

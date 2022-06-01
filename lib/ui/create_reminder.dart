@@ -24,7 +24,7 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
   final _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String title, comment;
-  late DateTime date;
+  late DateTime date = DateTime.now();
   bool error = false;
 
   @override
@@ -74,10 +74,11 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                       labelText: 'Renseignez votre titre',
                       labelStyle: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
+                          //fontWeight: FontWeight.bold,
                           color: Color.fromARGB(55, 75, 75, 75)),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(55, 75, 75, 75)),
                       ),
                     ),
                   ),
@@ -160,7 +161,8 @@ class _TextFieldDateTimePickerState extends State<TextFieldDateTimePicker> {
                           //fontWeight: FontWeight.bold,
                           color: Color.fromARGB(55, 75, 75, 75)),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.lightBlue),
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(55, 75, 75, 75)),
                       ),
                     ),
                   ),

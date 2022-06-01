@@ -17,17 +17,21 @@ class DisplayPictureScreen extends StatelessWidget {
 
   final String imagePath;
   DatabaseHelper db = DatabaseHelper.instance; // instance de la BDD
-  String ?id;
-  String ?photoname="photo";
-  String ?path="/image";
+  String? id;
+  String? photoname = "photo";
+  String? path = "/image";
 
-  DisplayPictureScreen({Key? key, required this.cameras, required this.imagePath})
+  DisplayPictureScreen(
+      {Key? key, required this.cameras, required this.imagePath})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
+      appBar: AppBar(
+        title: const Text('Enregistrement de l\'image'),
+        backgroundColor: const Color.fromARGB(55, 75, 75, 75),
+      ),
       body: Container(
         child: Row(
           children: <Widget>[
@@ -35,29 +39,29 @@ class DisplayPictureScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
-                Padding(
-                  padding: new EdgeInsets.all(5.0),
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  onSaved: (String ?val) {
-                    photoname = val!;
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'PHOTONAME',
-                    labelStyle: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlue),
+                  Padding(
+                    padding: new EdgeInsets.all(5.0),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    onSaved: (String? val) {
+                      photoname = val!;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Nom de la photo',
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(55, 75, 75, 75)),
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: new EdgeInsets.all(5.0),
-                ),
+                  Padding(
+                    padding: new EdgeInsets.all(5.0),
+                  ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,12 +87,11 @@ class DisplayPictureScreen extends StatelessWidget {
     // insertion d'une nouvelle image dans la bdd et retour a la liste d'image
 
     String id = Uuid().v4();
-      await db
-          .insertPicture(Imagecamera(id, path! ,photoname!)
-              .toMap())
-          .then((_) {
-        Navigator.pop(context); // retour a la connexion
-      });
+    await db
+        .insertPicture(Imagecamera(id, path!, photoname!).toMap())
+        .then((_) {
+      Navigator.pop(context); // retour a la connexion
+    });
     back_to_list(context);
   }
 
@@ -98,7 +101,10 @@ class DisplayPictureScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => principale(content: '', title: '',)), //MyApp()),
+          builder: (context) => principale(
+                content: '',
+                title: '',
+              )), //MyApp()),
     );
   }
 }
